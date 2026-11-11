@@ -3,536 +3,163 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lumia | Украшения с душой</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Lumia | Тест каталога</title>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #faf8fc; --surface-solid: #ffffff; --text: #1a1220; --text-dim: #71667a;
-    --accent: #9d4edd; --pink: #ff7eb3; --pink-soft: #ffe5f1;
-    --border: rgba(157, 78, 221, 0.12); --shadow-sm: 0 4px 12px rgba(157, 78, 221, 0.08);
-    --shadow-lg: 0 20px 40px -12px rgba(157, 78, 221, 0.25); --radius: 24px;
-  }
+  :root { --bg: #faf8fc; --surface-solid: #ffffff; --text: #1a1220; --text-dim: #71667a; --accent: #9d4edd; --pink: #ff7eb3; --pink-soft: #ffe5f1; --border: rgba(157, 78, 221, 0.12); --radius: 24px; }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; min-height: 100vh; position: relative; }
-
-  /* Живой фон */
-  body::before { content: ''; position: fixed; top: -20%; left: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(255, 126, 179, 0.15) 0%, transparent 70%); border-radius: 50%; z-index: -1; animation: float 20s ease-in-out infinite; }
-  body::after { content: ''; position: fixed; bottom: -20%; right: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(157, 78, 221, 0.15) 0%, transparent 70%); border-radius: 50%; z-index: -1; animation: float 25s ease-in-out infinite reverse; }
-  @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(30px, -30px) scale(1.1); } }
-
-  h1, h2, h3 { font-family: 'Manrope', sans-serif; letter-spacing: -0.03em; }
-
-  /* Шапка */
-  header { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-  .logo { font-size: 24px; font-weight: 800; background: linear-gradient(135deg, var(--accent) 0%, var(--pink) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; letter-spacing: -0.04em; }
-  .nav-links { display: flex; gap: 32px; }
-  .nav-links a { text-decoration: none; color: var(--text-dim); font-size: 14px; font-weight: 500; transition: all 0.3s; position: relative; padding: 4px 0; }
-  .nav-links a:hover { color: var(--accent); }
-  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--pink)); transition: width 0.3s; border-radius: 2px; }
-  .nav-links a:hover::after { width: 100%; }
-  .cart-btn { background: var(--text); color: #fff; border: none; padding: 12px 20px; border-radius: 14px; font-weight: 600; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.3s; box-shadow: 0 4px 15px rgba(26, 18, 32, 0.2); }
-  .cart-btn:hover { transform: translateY(-2px); background: var(--accent); box-shadow: 0 8px 25px rgba(157, 78, 221, 0.4); }
-  .cart-badge { background: var(--pink); color: #fff; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; }
-
-  /* Секции */
-  section { padding: 100px 24px; position: relative; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding: 40px 20px; }
+  h1, h2 { font-family: 'Manrope', sans-serif; }
   .container { max-width: 1200px; margin: 0 auto; }
-  .section-label { display: inline-block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); background: rgba(157, 78, 221, 0.1); padding: 6px 14px; border-radius: 20px; margin-bottom: 16px; }
-  .section-title { font-size: 42px; margin-bottom: 16px; text-align: center; line-height: 1.1; }
-  .section-sub { text-align: center; color: var(--text-dim); font-size: 17px; margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+  
+  /* Стили для ошибки */
+  .error-box { background: #fff1f2; border: 2px dashed #f43f5e; color: #be123c; padding: 24px; border-radius: 16px; margin-bottom: 30px; font-family: monospace; font-size: 14px; white-space: pre-wrap; }
+  .error-box h3 { font-family: 'Inter', sans-serif; margin-bottom: 12px; font-size: 18px; }
 
-  /* Hero */
-  .hero { text-align: center; padding: 140px 24px 100px; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-  .hero-label { display: inline-block; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); padding: 8px 20px; border-radius: 30px; font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 24px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
-  .hero h1 { font-size: 72px; margin-bottom: 24px; line-height: 1.05; max-width: 800px; }
-  .hero h1 .gradient { background: linear-gradient(135deg, var(--accent) 0%, var(--pink) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .hero p { color: var(--text-dim); font-size: 20px; max-width: 600px; line-height: 1.6; margin-bottom: 40px; }
-  .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
-  .hero-btn-primary { background: var(--text); color: #fff; text-decoration: none; padding: 18px 36px; border-radius: 16px; font-size: 16px; font-weight: 700; transition: all 0.3s; box-shadow: 0 10px 30px rgba(26, 18, 32, 0.2); }
-  .hero-btn-primary:hover { transform: translateY(-3px); background: var(--accent); box-shadow: 0 15px 40px rgba(157, 78, 221, 0.4); }
-  .hero-btn-secondary { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); color: var(--text); text-decoration: none; padding: 18px 36px; border-radius: 16px; font-size: 16px; font-weight: 700; transition: all 0.3s; border: 1px solid var(--border); }
-  .hero-btn-secondary:hover { transform: translateY(-3px); background: #fff; }
-
-  /* О авторе */
-  .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .about-img-wrap { position: relative; }
-  .about-img { width: 100%; border-radius: 32px; object-fit: cover; height: 500px; box-shadow: var(--shadow-lg); position: relative; z-index: 1; }
-  .about-img-wrap::before { content: ''; position: absolute; inset: -20px; background: linear-gradient(135deg, var(--accent), var(--pink)); border-radius: 40px; opacity: 0.2; z-index: 0; filter: blur(20px); }
-  .about-text h2 { font-size: 40px; margin-bottom: 24px; line-height: 1.1; }
-  .about-text p { color: var(--text-dim); font-size: 17px; line-height: 1.8; margin-bottom: 20px; }
-
-  /* Каталог */
   .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 32px; }
-  .product-card { background: var(--surface-solid); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; position: relative; border: 1px solid var(--border); }
-  .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
-  .product-img-wrap { overflow: hidden; height: 320px; position: relative; background: #f5f0f7; }
-  .product-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
-  .product-card:hover .product-img { transform: scale(1.08); }
-  .sold-out-overlay { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.7); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
-  .sold-out-badge { background: var(--text); color: #fff; padding: 10px 24px; border-radius: 12px; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; transform: rotate(-8deg); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+  .product-card { background: var(--surface-solid); border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 12px rgba(157, 78, 221, 0.08); display: flex; flex-direction: column; border: 1px solid var(--border); }
+  .product-img-wrap { overflow: hidden; height: 320px; background: #f5f0f7; }
+  .product-img { width: 100%; height: 100%; object-fit: cover; }
   .product-info { padding: 24px; display: flex; flex-direction: column; flex: 1; }
-  .product-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+  .product-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
   .product-price { font-size: 24px; font-weight: 800; color: var(--accent); margin-bottom: 20px; }
-  .product-action { margin-top: auto; min-height: 48px; display: flex; align-items: center; justify-content: center; }
-  .add-btn { width: 100%; background: var(--text); color: #fff; border: none; padding: 14px; border-radius: 14px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.3s; }
-  .add-btn:hover { background: var(--accent); box-shadow: 0 6px 20px rgba(157, 78, 221, 0.3); }
-  .add-btn.disabled { background: var(--border); color: var(--text-dim); cursor: not-allowed; }
-  .add-btn.disabled:hover { background: var(--border); box-shadow: none; }
-  .qty-controls { display: flex; align-items: center; justify-content: space-between; width: 100%; background: var(--text); border-radius: 14px; padding: 6px; }
-  .qty-btn { background: transparent; border: none; color: #fff; font-size: 22px; font-weight: 600; cursor: pointer; width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-  .qty-btn:hover { background: rgba(255, 255, 255, 0.15); }
-  .qty-value { color: #fff; font-weight: 800; font-size: 16px; }
-
-  /* Отзывы */
-  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
-  .review-card { background: var(--surface-solid); border-radius: var(--radius); padding: 32px; border: 1px solid var(--border); transition: all 0.3s; box-shadow: var(--shadow-sm); position: relative; }
-  .review-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-  .review-card::before { content: '"'; position: absolute; top: 16px; right: 24px; font-size: 80px; font-family: Georgia, serif; color: var(--pink-soft); line-height: 1; opacity: 0.8; }
-  .review-stars { color: #fbbf24; font-size: 18px; margin-bottom: 16px; letter-spacing: 3px; }
-  .review-text { font-size: 16px; line-height: 1.7; margin-bottom: 24px; position: relative; z-index: 1; }
-  .review-author { display: flex; align-items: center; gap: 12px; }
-  .review-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--pink)); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: 18px; }
-  .review-name { font-weight: 700; font-size: 15px; }
-  .review-city { font-size: 13px; color: var(--text-dim); }
-
-  /* Контакты */
-  .contact-card { background: var(--surface-solid); padding: 60px 40px; border-radius: 32px; box-shadow: var(--shadow-lg); max-width: 560px; margin: 0 auto; text-align: center; border: 1px solid var(--border); }
-  .contact-card h3 { font-size: 28px; margin-bottom: 16px; }
-  .contact-card p { color: var(--text-dim); font-size: 16px; margin-bottom: 32px; line-height: 1.6; }
-  .contact-btn-vk { display: inline-flex; align-items: center; justify-content: center; gap: 12px; background: #0077FF; color: #fff; text-decoration: none; padding: 18px 32px; border-radius: 16px; font-weight: 700; font-size: 17px; box-shadow: 0 10px 30px rgba(0, 119, 255, 0.3); transition: all 0.3s; width: 100%; }
-  .contact-btn-vk:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 119, 255, 0.4); background: #0066DD; }
-  .contact-btn-vk svg { width: 24px; height: 24px; }
-
-  /* Наверх */
-  .scroll-top-btn { position: fixed; bottom: 32px; right: 32px; width: 56px; height: 56px; border-radius: 50%; background: var(--text); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); opacity: 0; pointer-events: none; transform: translateY(20px); transition: all 0.3s; z-index: 50; }
-  .scroll-top-btn.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
-  .scroll-top-btn:hover { background: var(--accent); transform: translateY(-4px); }
-  .scroll-top-btn svg { width: 24px; height: 24px; }
-
-  /* Корзина */
-  .cart-overlay { position: fixed; inset: 0; background: rgba(26, 18, 32, 0.5); opacity: 0; pointer-events: none; transition: 0.3s; z-index: 200; backdrop-filter: blur(6px); }
-  .cart-overlay.active { opacity: 1; pointer-events: auto; }
-  .cart-panel { position: fixed; top: 0; right: -480px; width: 100%; max-width: 440px; height: 100%; background: var(--surface-solid); z-index: 201; box-shadow: -20px 0 60px rgba(0,0,0,0.15); transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
-  .cart-panel.active { right: 0; }
-  .cart-head { padding: 28px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-  .cart-head h2 { font-size: 24px; }
-  .cart-close { background: var(--bg); border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 18px; cursor: pointer; color: var(--text); transition: all 0.2s; }
-  .cart-close:hover { background: var(--pink-soft); color: var(--accent); }
-  .cart-items { flex: 1; overflow-y: auto; padding: 28px; display: flex; flex-direction: column; gap: 24px; }
-  .cart-item { display: flex; gap: 16px; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
-  .cart-item img { width: 80px; height: 80px; border-radius: 16px; object-fit: cover; }
-  .cart-item-info { flex: 1; }
-  .cart-item-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-  .cart-item-price { font-size: 16px; color: var(--accent); font-weight: 700; }
-  .cart-item-remove { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 22px; transition: color 0.2s; }
-  .cart-item-remove:hover { color: #e11d48; }
-  .cart-footer { padding: 28px; border-top: 1px solid var(--border); background: var(--bg); }
-  .cart-total { display: flex; justify-content: space-between; font-size: 22px; font-weight: 800; margin-bottom: 24px; }
-  .checkout-btn { width: 100%; background: var(--text); color: #fff; border: none; padding: 18px; border-radius: 16px; font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s; }
-  .checkout-btn:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 10px 25px rgba(157, 78, 221, 0.3); }
-
-  /* Модалка */
-  .modal-overlay { position: fixed; inset: 0; background: rgba(26, 18, 32, 0.6); display: flex; align-items: center; justify-content: center; z-index: 300; opacity: 0; pointer-events: none; transition: 0.3s; padding: 20px; backdrop-filter: blur(8px); }
-  .modal-overlay.active { opacity: 1; pointer-events: auto; }
-  .modal { background: var(--surface-solid); border-radius: 32px; padding: 40px; width: 100%; max-width: 460px; box-shadow: 0 30px 80px rgba(0,0,0,0.2); transform: translateY(20px) scale(0.95); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-  .modal-overlay.active .modal { transform: translateY(0) scale(1); }
-  .modal h2 { font-size: 28px; margin-bottom: 8px; }
-  .modal-sub { font-size: 15px; color: var(--text-dim); margin-bottom: 32px; }
-  .form-group { margin-bottom: 20px; }
-  .form-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); }
-  .form-group input, .form-group textarea { width: 100%; padding: 16px; border: 2px solid var(--border); border-radius: 14px; font-family: inherit; font-size: 15px; background: var(--bg); transition: all 0.2s; }
-  .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 0 0 4px rgba(157, 78, 221, 0.1); }
-  .submit-btn { width: 100%; background: var(--text); color: #fff; border: none; padding: 18px; border-radius: 16px; font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 8px; transition: all 0.3s; }
-  .submit-btn:hover { background: var(--accent); transform: translateY(-2px); }
-  .submit-btn:disabled { opacity: 0.6; cursor: wait; }
-  .cancel-btn { width: 100%; background: transparent; color: var(--text-dim); border: none; padding: 14px; font-size: 14px; cursor: pointer; margin-top: 8px; font-weight: 600; }
-  .cancel-btn:hover { color: var(--text); }
-  .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--text); color: #fff; padding: 16px 32px; border-radius: 16px; font-weight: 600; font-size: 15px; opacity: 0; transition: all 0.3s; z-index: 400; pointer-events: none; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-  @media (max-width: 900px) {
-    .about-content { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-    .about-img { height: 400px; }
-    .nav-links { display: none; }
-    .hero h1 { font-size: 48px; }
-  }
-  @media (max-width: 600px) {
-    .hero h1 { font-size: 36px; }
-    .hero p { font-size: 16px; }
-    .hero { padding: 100px 20px 60px; }
-    .hero-btn-primary, .hero-btn-secondary { width: 100%; text-align: center; }
-    .catalog-grid { grid-template-columns: 1fr; gap: 20px; }
-    .product-img-wrap { height: 280px; }
-    .section-title { font-size: 32px; }
-    .contact-card { padding: 40px 24px; }
-    .cart-panel { max-width: 100%; }
-    .scroll-top-btn { bottom: 20px; right: 20px; width: 48px; height: 48px; }
-  }
+  .sold-out-badge { background: #e11d48; color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 700; display: inline-block; margin-bottom: 10px; }
 </style>
 </head>
 <body>
 
-<header>
-  <a href="#hero" class="logo">✨ Lumia</a>
-  <nav class="nav-links">
-    <a href="#hero">Главная</a>
-    <a href="#about">О авторе</a>
-    <a href="#catalog">Каталог</a>
-    <a href="#reviews">Отзывы</a>
-    <a href="#contact">Контакты</a>
-  </nav>
-  <button class="cart-btn" onclick="toggleCart()">
-    🛒 <span>Корзина</span> <span class="cart-badge" id="cartCount">0</span>
-  </button>
-</header>
-
-<section id="hero" class="hero">
-  <div class="hero-label">✨ Авторские украшения ручной работы</div>
-  <h1>Украшения <span class="gradient">с душой</span></h1>
-  <p>Каждое изделие создается вручную с любовью. Найдите то, что будет говорить именно о вас.</p>
-  <div class="hero-buttons">
-    <a href="#catalog" class="hero-btn-primary">Смотреть каталог</a>
-    <a href="#about" class="hero-btn-secondary">О мастере</a>
+<div class="container">
+  <h1 style="margin-bottom: 20px;">Тест каталога</h1>
+  
+  <!-- Блок для вывода ошибок -->
+  <div id="debugBox" class="error-box" style="display:none;">
+    <h3>ОШИБКА ЗАГРУЗКИ:</h3>
+    <div id="debugText"></div>
   </div>
-</section>
 
-<section id="about">
-  <div class="container">
-    <div class="about-content">
-      <div class="about-img-wrap">
-        <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?q=80&w=800&auto=format&fit=crop" alt="Мастер" class="about-img">
-      </div>
-      <div class="about-text">
-        <div class="section-label">О авторе</div>
-        <h2>Создаю красоту руками</h2>
-        <p>Привет! Меня зовут [Имя мамы]. Я создаю украшения вручную уже более [X] лет. Каждое изделие — это маленькая история, в которую вложена частичка души.</p>
-        <p>Я использую только качественные материалы: натуральные камни, серебро 925 пробы и позолоту. Все украшения создаются в единственном экземпляре или ограниченным тиражом.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="catalog" style="background: rgba(255,255,255,0.4);">
-  <div class="container">
-    <div style="text-align: center;">
-      <div class="section-label">Коллекция</div>
-      <h2 class="section-title">Каталог</h2>
-      <p class="section-sub">Выберите украшение, которое откликается именно вам</p>
-    </div>
-    <div class="catalog-grid" id="catalogGrid">
-      <div style="text-align:center; width:100%; padding: 40px; color: var(--text-dim);">Загрузка товаров...</div>
-    </div>
-  </div>
-</section>
-
-<section id="reviews">
-  <div class="container">
-    <div style="text-align: center;">
-      <div class="section-label">Отзывы</div>
-      <h2 class="section-title">Что говорят клиенты</h2>
-      <p class="section-sub">Те, кто уже носит мои украшения</p>
-    </div>
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">Серьги просто невероятные! Ношу не снимая уже месяц, качество на высоте. Очень довольна покупкой!</div>
-        <div class="review-author"><div class="review-avatar">А</div><div><div class="review-name">Анна</div><div class="review-city">Москва</div></div></div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">Заказывала колье в подарок маме. Она была в восторге! Упаковка красивая, всё сделано с любовью.</div>
-        <div class="review-author"><div class="review-avatar" style="background:linear-gradient(135deg,#4f46e5,#818cf8);">М</div><div><div class="review-name">Мария</div><div class="review-city">СПб</div></div></div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">Очень нежные и красивые украшения. Чувствуется ручная работа. Браслет подошёл идеально!</div>
-        <div class="review-author"><div class="review-avatar" style="background:linear-gradient(135deg,#db2777,#f472b6);">Е</div><div><div class="review-name">Екатерина</div><div class="review-city">Казань</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contact" style="background: rgba(255,255,255,0.4);">
-  <div class="container">
-    <div style="text-align: center;">
-      <div class="section-label">Контакты</div>
-      <h2 class="section-title">Как связаться</h2>
-      <p class="section-sub">Остались вопросы? Напишите мне!</p>
-    </div>
-    <div class="contact-card">
-      <h3>Я всегда на связи</h3>
-      <p>Отвечаю на сообщения в течение дня. Буду рада обсудить детали заказа или помочь с выбором.</p>
-      <a href="https://vk.com/" id="vkContactLink" target="_blank" class="contact-btn-vk">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.575 2.389 7.35 2.389z"/></svg>
-        Написать в ВКонтакте
-      </a>
-    </div>
-  </div>
-</section>
-
-<button class="scroll-top-btn" id="scrollTopBtn" onclick="scrollToTop()" aria-label="Наверх">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-</button>
-
-<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-<div class="cart-panel" id="cartPanel">
-  <div class="cart-head">
-    <h2>Корзина</h2>
-    <button class="cart-close" onclick="toggleCart()">✕</button>
-  </div>
-  <div class="cart-items" id="cartItems"></div>
-  <div class="cart-footer">
-    <div class="cart-total"><span>Итого:</span><span id="cartTotal">0 ₽</span></div>
-    <button class="checkout-btn" onclick="openCheckout()">Оформить заказ</button>
+  <div class="catalog-grid" id="catalogGrid">
+    <div style="grid-column: 1/-1; text-align: center; padding: 40px;">Загрузка...</div>
   </div>
 </div>
-
-<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeCheckout()">
-  <div class="modal">
-    <h2>Оформление</h2>
-    <div class="modal-sub">Оставьте контакты, и мы свяжемся с вами.</div>
-    <div class="form-group"><label>Ваше имя</label><input type="text" id="clientName" placeholder="Анна"></div>
-    <div class="form-group"><label>Телефон или ВК</label><input type="text" id="clientContact" placeholder="+7 (999) 123-45-67"></div>
-    <div class="form-group"><label>Комментарий</label><textarea id="clientComment" rows="2" placeholder="Пожелания..."></textarea></div>
-    <button class="submit-btn" id="submitBtn" onclick="submitOrder()">Отправить заказ</button>
-    <button class="cancel-btn" onclick="closeCheckout()">Отмена</button>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
 
 <script>
-  // ==========================================
-  // ВСТАВЬ СЮДА ССЫЛКУ ИЗ GOOGLE ТАБЛИЦ (CSV)
-  // ==========================================
-  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQKyqrzk1YSp8N2qk90zEJFLL7I3EZPgdDOcRzJibwWgriJfgkNdF4iGZcF0zVaLmR6YC6k1TTuH1xo/pub?output=csv';
+  // =========================================================
+  // 1. ВСТАВЬ СВОЮ ССЫЛКУ (Она должна заканчиваться на output=csv)
+  // =========================================================
+  const SHEET_CSV_URL = 'ВСТАВЬ_СЮДА_ССЫЛКУ_НА_ТАБЛИЦУ_CSV'; 
 
-  const MOM_VK_LINK = 'https://vk.com/'; // Ссылка на ВК мамы
-  document.getElementById('vkContactLink').href = MOM_VK_LINK;
+  function showError(msg, debugData = '') {
+    document.getElementById('catalogGrid').innerHTML = '';
+    const box = document.getElementById('debugBox');
+    box.style.display = 'block';
+    document.getElementById('debugText').innerText = msg + '\n\n--- Ответ сервера (первые 200 символов) ---\n' + debugData;
+  }
 
-  let products = [];
-  let cart = [];
-
-  // Функция для правильного парсинга CSV (учитывает запятые в кавычках)
   function parseCSV(text) {
     const result = [];
     let row = [];
     let current = '';
     let inQuotes = false;
-
+    
     for (let i = 0; i < text.length; i++) {
       const char = text[i];
       const nextChar = text[i + 1];
-
+      
       if (char === '"') {
-        if (inQuotes && nextChar === '"') {
-          current += '"';
-          i++;
-        } else {
-          inQuotes = !inQuotes;
-        }
+        if (inQuotes && nextChar === '"') { current += '"'; i++; }
+        else { inQuotes = !inQuotes; }
       } else if (char === ',' && !inQuotes) {
-        row.push(current);
-        current = '';
+        row.push(current); current = '';
       } else if ((char === '\n' || char === '\r') && !inQuotes) {
         if (current !== '' || row.length > 0) {
-          row.push(current);
-          result.push(row);
-          row = [];
-          current = '';
+          row.push(current); result.push(row); row = []; current = '';
         }
         if (char === '\r' && nextChar === '\n') i++;
       } else {
         current += char;
       }
     }
-    if (current !== '' || row.length > 0) {
-      row.push(current);
-      result.push(row);
-    }
+    if (current !== '' || row.length > 0) { row.push(current); result.push(row); }
     return result;
   }
 
-  // Загрузка товаров из Google Sheets
   async function loadCatalog() {
-    const grid = document.getElementById('catalogGrid');
-
-    if (SHEET_CSV_URL.includes('ВСТАВЬ')) {
-      grid.innerHTML = '<div style="text-align:center; width:100%; padding: 40px; color: var(--text-dim);">Укажите ссылку на Google Таблицу в коде, чтобы загрузить товары.</div>';
+    if (SHEET_CSV_URL === 'ВСТАВЬ_СЮДА_ССЫЛКУ_НА_ТАБЛИЦУ_CSV') {
+      showError('Ты не вставил ссылку на таблицу в код! Найди строку "const SHEET_CSV_URL" и вставь ссылку.');
       return;
     }
 
     try {
-      const response = await fetch(SHEET_CSV_URL);
-      if (!response.ok) throw new Error('Ошибка сети');
-      const text = await response.text();
-      const rows = parseCSV(text);
-
-      // Пропускаем заголовки (первую строку)
-      products = rows.slice(1).filter(r => r.length >= 2 && r[0].trim() !== '').map((cols, index) => ({
-        id: index + 1,
-        title: cols[0] ? cols[0].trim() : 'Без названия',
-        price: cols[1] ? Number(cols[1]) || 0 : 0,
-        img: cols[2] ? cols[2].trim() : 'https://via.placeholder.com/300x320?text=No+Image',
-        sold: cols[3] ? cols[3].trim().toLowerCase() === 'да' : false
-      }));
-
-      renderCatalog();
-    } catch (error) {
-      console.error('Ошибка загрузки:', error);
-      grid.innerHTML = '<div style="text-align:center; width:100%; padding: 40px; color: #e11d48;">Не удалось загрузить каталог. Проверьте ссылку и доступ к таблице.</div>';
-    }
-  }
-
-  // Отрисовка каталога
-  function renderCatalog() {
-    document.getElementById('catalogGrid').innerHTML = products.map(p => {
-      const cartItem = cart.find(item => item.id === p.id);
-      const qty = cartItem ? cartItem.qty : 0;
-
-      if (p.sold) {
-        return `
-          <div class="product-card">
-            <div class="product-img-wrap">
-              <img src="${p.img}" class="product-img" alt="${p.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x320?text=Error'">
-              <div class="sold-out-overlay"><div class="sold-out-badge">Продано</div></div>
-            </div>
-            <div class="product-info">
-              <div class="product-title">${p.title}</div>
-              <div class="product-price">${p.price.toLocaleString()} ₽</div>
-              <div class="product-action"><button class="add-btn disabled" disabled>Нет в наличии</button></div>
-            </div>
-          </div>
-        `;
+      // Добавляем &t= чтобы браузер не кэшировал
+      const url = SHEET_CSV_URL.includes('?') ? SHEET_CSV_URL + '&t=' + Date.now() : SHEET_CSV_URL + '?t=' + Date.now();
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        showError(`Сервер вернул ошибку ${response.status}. Проверь ссылку.`);
+        return;
       }
 
-      const actionHtml = qty > 0
-        ? `<div class="qty-controls">
-             <button class="qty-btn" onclick="decreaseQty(${p.id})">−</button>
-             <span class="qty-value">${qty}</span>
-             <button class="qty-btn" onclick="increaseQty(${p.id})">+</button>
-           </div>`
-        : `<button class="add-btn" onclick="addToCart(${p.id})">В корзину</button>`;
+      const text = await response.text();
 
-      return `
-        <div class="product-card">
-          <div class="product-img-wrap"><img src="${p.img}" class="product-img" alt="${p.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x320?text=Error'"></div>
-          <div class="product-info">
-            <div class="product-title">${p.title}</div>
-            <div class="product-price">${p.price.toLocaleString()} ₽</div>
-            <div class="product-action">${actionHtml}</div>
-          </div>
-        </div>
-      `;
-    }).join('');
-  }
+      // ПРОВЕРКА: Если пришел HTML (то есть мы скачали страницу, а не файл)
+      if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
+        showError('Вместо CSV-файла скачалась веб-страница! Скорее всего, ты скопировал не ту ссылку (без "output=csv") или выбрал "Веб-страница" вместо "CSV" при публикации.', text.substring(0, 200));
+        return;
+      }
 
-  function addToCart(id) {
-    const product = products.find(p => p.id === id);
-    if (product.sold) return;
-    const existing = cart.find(item => item.id === id);
-    if (existing) existing.qty++;
-    else cart.push({ ...product, qty: 1 });
-    renderCatalog(); updateCart();
-    showToast(`Добавлено: ${product.title}`);
-  }
+      const rows = parseCSV(text);
+      console.log("Распарсенные строки:", rows); // Смотрим в консоль, если что
 
-  function increaseQty(id) {
-    const item = cart.find(i => i.id === id);
-    if (item) { item.qty++; renderCatalog(); updateCart(); }
-  }
+      if (rows.length < 2) {
+        showError('В таблице нет данных. Убедись, что первая строка — заголовки, а со второй идут товары.');
+        return;
+      }
 
-  function decreaseQty(id) {
-    const index = cart.findIndex(i => i.id === id);
-    if (index !== -1) {
-      cart[index].qty--;
-      if (cart[index].qty <= 0) cart.splice(index, 1);
-      renderCatalog(); updateCart();
+      // Убираем заголовки (первую строку)
+      const dataRows = rows.slice(1);
+
+      const products = dataRows.map((cols, index) => {
+        // Если строка пустая — пропускаем
+        if (!cols[0] || cols[0].trim() === '') return null;
+        
+        return {
+          id: index,
+          title: cols[0] ? cols[0].trim() : 'Без названия',
+          price: cols[1] ? Number(cols[1].replace(/[^\d]/g, '')) || 0 : 0, // Очищаем цену от букв
+          img: cols[2] ? cols[2].trim() : '',
+          sold: cols[3] ? ['да', 'yes', 'true', '1'].includes(cols[3].trim().toLowerCase()) : false
+        };
+      }).filter(p => p !== null);
+
+      if (products.length === 0) {
+        showError('Данные в таблице есть, но они не распознались. Проверь, что товары начинаются со 2-й строки, а не с 1-й.');
+        return;
+      }
+
+      // Если всё ок, рисуем
+      document.getElementById('debugBox').style.display = 'none';
+      renderProducts(products);
+
+    } catch (err) {
+      showError('Ошибка сети. Проверь интернет или правильность ссылки (возможно, таблица закрыта на приватность).\n' + err.message);
     }
   }
 
-  function updateCart() {
-    document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
-    if (cart.length === 0) {
-      document.getElementById('cartItems').innerHTML = '<div style="text-align:center; color:var(--text-dim); margin-top:60px;"><div style="font-size:48px; margin-bottom:16px;">🛍</div><p style="font-size:16px; font-weight:600;">Корзина пока пуста</p></div>';
-      document.getElementById('cartTotal').textContent = '0 ₽';
-      return;
-    }
-    document.getElementById('cartItems').innerHTML = cart.map((item, index) => `
-      <div class="cart-item">
-        <img src="${item.img}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/80'">
-        <div class="cart-item-info">
-          <div class="cart-item-title">${item.title}</div>
-          <div class="cart-item-price">${(item.price * item.qty).toLocaleString()} ₽ <span style="font-size:13px; color:var(--text-dim); font-weight:500;">(${item.qty} шт.)</span></div>
+  function renderProducts(products) {
+    document.getElementById('catalogGrid').innerHTML = products.map(p => `
+      <div class="product-card">
+        <div class="product-img-wrap">
+          ${p.img ? `<img src="${p.img}" class="product-img" onerror="this.src='https://via.placeholder.com/300?text=Ошибка+фото'">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;">Нет фото</div>`}
         </div>
-        <button class="cart-item-remove" onclick="removeFromCart(${index})">✕</button>
+        <div class="product-info">
+          ${p.sold ? '<div class="sold-out-badge">ПРОДАНО</div>' : ''}
+          <div class="product-title">${p.title}</div>
+          <div class="product-price">${p.price.toLocaleString()} ₽</div>
+        </div>
       </div>
     `).join('');
-    document.getElementById('cartTotal').textContent = cart.reduce((s, i) => s + i.price * i.qty, 0).toLocaleString() + ' ₽';
   }
 
-  function removeFromCart(index) { cart.splice(index, 1); renderCatalog(); updateCart(); }
-  function toggleCart() { document.getElementById('cartPanel').classList.toggle('active'); document.getElementById('cartOverlay').classList.toggle('active'); }
-
-  function openCheckout() {
-    if (cart.length === 0) { showToast('Сначала добавьте товары'); return; }
-    document.getElementById('modalOverlay').classList.add('active');
-  }
-  function closeCheckout() { document.getElementById('modalOverlay').classList.remove('active'); }
-
-  function submitOrder() {
-    const name = document.getElementById('clientName').value.trim();
-    const contact = document.getElementById('clientContact').value.trim();
-    const comment = document.getElementById('clientComment').value.trim();
-
-    if (!name || !contact) { showToast('Заполните имя и контакт'); return; }
-
-    let message = `🛍 НОВЫЙ ЗАКАЗ С САЙТА\n\n👤 Имя: ${name}\n📞 Контакт: ${contact}\n`;
-    if (comment) message += `💬 Комментарий: ${comment}\n`;
-    message += `\n📦 Состав заказа:\n`;
-    let total = 0;
-    cart.forEach(item => {
-      message += `• ${item.title} — ${item.qty} шт. x ${item.price} ₽\n`;
-      total += item.qty * item.price;
-    });
-    message += `\n💰 Итого: ${total.toLocaleString()} ₽`;
-
-    navigator.clipboard.writeText(message).then(() => {
-      cart = [];
-      renderCatalog();
-      updateCart();
-      closeCheckout();
-      toggleCart();
-      document.getElementById('clientName').value = '';
-      document.getElementById('clientContact').value = '';
-      document.getElementById('clientComment').value = '';
-
-      setTimeout(() => {
-        if (confirm('✅ Заказ сформирован!\n\nТекст заказа уже скопирован. Нажмите "ОК", чтобы открыть чат с мамой в ВК, и просто вставьте текст в сообщение.')) {
-          window.open(MOM_VK_LINK, '_blank');
-        }
-      }, 300);
-    }).catch(err => {
-      alert('Ваш заказ:\n\n' + message + '\n\nПожалуйста, скопируйте этот текст и отправьте его в ВК.');
-    });
-  }
-
-  function showToast(msg) {
-    const toast = document.getElementById('toast');
-    toast.textContent = msg;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 3000);
-  }
-
-  window.addEventListener('scroll', () => {
-    document.getElementById('scrollTopBtn').classList.toggle('show', window.scrollY > 400);
-  });
-  function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-
-  // Запускаем загрузку при старте
   loadCatalog();
 </script>
 </body>
