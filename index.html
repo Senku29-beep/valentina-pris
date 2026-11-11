@@ -650,5 +650,54 @@
   renderCatalog();
   updateCart();
 </script>
+<script>
+  const SHEET_CSV_URL = 'ВАША_ССЫЛКА_НА_CSV';
+
+  async function loadCatalogFromGoogleSheets() {
+    try {
+      const response = await fetch(SHEET_CSV_URL);
+      const csvText = await response.text();
+
+      // Разбиваем текст на строки и убираем пустые
+      const rows = csvText.split('\n').map(row => row.trim()).filter(row => row);
+
+      // Пропускаем первую строку (заголовки)
+      const items = rows.slice(1).map(row => {
+        // Разделяем столбцы с учетом кавычек (если в описании есть запятые)
+        const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(col => col.replace(/^"|"$/g, '').trim());
+        return {
+          name: cols[0] || '',
+          price: Number(cols[1]) || 0,
+          description: cols[2] || '',
+          image: cols[3] || ''
+        };
+      });
+
+      // Находим контейнер каталога (подставьте свой класс или id вместо .catalog-grid)
+      const catalogContainer = document.querySelector('.catalog-grid');
+      if (!catalogContainer) return;
+
+      catalogContainer.innerHTML = ''; // Очищаем старые товары
+
+      items.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'product-card'; // Подставьте класс вашей карточки
+        card.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <p>${item.description}</p>
+          <div class="price">${item.price} ₽</div>
+          <button onclick="addToCart('${item.name}', ${item.price})">В корзину</button>
+        `;
+        catalogContainer.appendChild(card);
+      });
+    } catch (error) {
+      console.error('Ошибка загрузки каталога:', error);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadCatalogFromGoogleSheets);
+</script>
+
 </body>
 </html>
