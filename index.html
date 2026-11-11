@@ -241,7 +241,7 @@
   }
   .contact-card h3 { font-size: 28px; margin-bottom: 16px; }
   .contact-card p { color: var(--text-dim); font-size: 16px; margin-bottom: 32px; line-height: 1.6; }
-  
+
   .social-links { display: flex; flex-direction: column; gap: 12px; }
   .social-btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 12px;
@@ -250,7 +250,7 @@
   }
   .social-btn svg { width: 24px; height: 24px; }
   .social-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
-  
+
   .btn-vk { background: #0077FF; }
   .btn-vk:hover { background: #0066DD; }
   .btn-tg { background: #229ED9; }
@@ -457,19 +457,19 @@
     <div class="contact-card">
       <h3>Я всегда на связи</h3>
       <p>Отвечаю на сообщения в течение дня. Буду рада обсудить детали заказа или помочь с выбором.</p>
-      
+
       <div class="social-links">
         <!-- Ссылки на соцсети задаются в скрипте -->
         <a href="#" id="linkVK" target="_blank" class="social-btn btn-vk">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.575 2.389 7.35 2.389z"/></svg>
           Написать в ВКонтакте
         </a>
-        
+
         <a href="#" id="linkTG" target="_blank" class="social-btn btn-tg">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.26-1.91.178-.191 3.257-2.983 3.318-3.237.007-.031.014-.146-.056-.212-.07-.066-.174-.043-.25-.025-.109.026-1.835 1.165-5.178 3.417-.491.337-.933.5-1.328.49-.436-.01-1.278-.246-1.902-.45-.764-.248-1.37-.38-1.315-.803.028-.22.33-.446.908-.677 3.565-1.55 5.94-2.574 7.126-3.073 3.388-1.408 4.092-1.654 4.55-1.662z"/></svg>
           Написать в Telegram
         </a>
-        
+
         <a href="#" id="linkMAX" target="_blank" class="social-btn btn-max">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
           Написать в MAX
@@ -517,12 +517,12 @@
   // ==========================================
   // 1. НАСТРОЙКИ (ВСТАВЬ СВОИ ССЫЛКИ)
   // ==========================================
-  
+
   // Ссылки на мессенджеры мамы:
   const LINK_VK = 'https://vk.com/'; // Например: https://vk.com/id123456789
   const LINK_TG = 'https://t.me/'; // Например: https://t.me/lumia_shop
   const LINK_MAX = 'https://max.ru/'; // Ссылка на профиль в MAX
-  
+
   // Ссылка на Google Таблицу (уже вставлена)
   const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQKyqrzk1YSp8N2qk90zEJFLL7I3EZPgdDOcRzJibwWgriJfgkNdF4iGZcF0zVaLmR6YC6k1TTuH1xo/pub?gid=0&single=true&output=csv';
 
@@ -542,11 +542,11 @@
     let row = [];
     let current = '';
     let inQuotes = false;
-    
+
     for (let i = 0; i < text.length; i++) {
       const char = text[i];
       const nextChar = text[i + 1];
-      
+
       if (char === '"') {
         if (inQuotes && nextChar === '"') { current += '"'; i++; }
         else { inQuotes = !inQuotes; }
@@ -570,7 +570,7 @@
     try {
       const response = await fetch(SHEET_CSV_URL + '&t=' + Date.now());
       if (!response.ok) throw new Error('Ошибка сети');
-      
+
       const text = await response.text();
       if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
         throw new Error('Неверная ссылка');
@@ -581,8 +581,8 @@
 
       products = rows.slice(1).map((cols, index) => {
         const name = cols[0] ? cols[0].trim() : '';
-        if (!name) return null; 
-        
+        if (!name) return null;
+
         return {
           id: index,
           title: name,
