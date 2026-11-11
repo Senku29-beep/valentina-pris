@@ -28,25 +28,26 @@
 <body>
 
 <div class="container">
-  <h1>Каталог</h1>
+  <h1>Каталог товаров</h1>
   
-  <div id="debugBox" class="error-box" style="display:none;"></div>
-  <div id="catalogGrid" class="catalog-grid">
+  <div id="errorPanel" class="error-box" style="display:none;"></div>
+  <div id="productsContainer" class="catalog-grid">
     <div class="loading" style="grid-column: 1/-1;">Загрузка товаров...</div>
   </div>
 </div>
 
 <script>
-  // Твоя ссылка (я её уже вставил за тебя)
-  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQKyqrzk1YSp8N2qk90zEJFLL7I3EZPgdDOcRzJibwWgriJfgkNdF4iGZcF0zVaLmR6YC6k1TTuH1xo/pub?output=csv'; 
+  // Твоя ссылка
+  const TABLE_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQKyqrzk1YSp8N2qk90zEJFLL7I3EZPgdDOcRzJibwWgriJfgkNdF4iGZcF0zVaLmR6YC6k1TTuH1xo/pub?output=csv'; 
 
-  function showError(msg) {
-    document.getElementById('catalogGrid').innerHTML = '';
-    const box = document.getElementById('debugBox');
-    box.style.display = 'block';
-    box.innerText = '⚠️ ' + msg;
+  function displayError(message) {
+    document.getElementById('productsContainer').innerHTML = '';
+    const panel = document.getElementById('errorPanel');
+    panel.style.display = 'block';
+    panel.innerText = '⚠️ ' + message;
   }
 
+  // Парсер CSV
   function parseCSV(text) {
     const result = [];
     let row = [];
@@ -75,57 +76,65 @@
     return result;
   }
 
-  async function loadCatalog() {
+  async function initCatalog() {
     try {
-      const url = SHEET_CSV_URL + '&t=' + Date.now();
-      const response = await fetch(url);
+      // Запрос к таблице
+      const response = await fetch(TABLE_URL + '&t=' + Date.now());
       
-      if (!response.ok) throw new Error('Ошибка сети');
-      const text = await response.text();
-
-      if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
-        showError('Вместо данных скачалась HTML-страница. Проверь, что таблица опубликована именно как CSV.');
+      if (!response.ok) {
+        displayError('Не удалось связаться с Google Таблицами. Код ошибки: ' + response.status);
         return;
       }
 
-      const rows = parseCSV(text);
-      
-      if (rows.length < 2) {
-        showError('В таблице нет товаров. Добавь данные со второй строки.');
+      const textData = await response.text();
+
+      // Проверка, не скачалась ли HTML-страница вместо CSV
+      if (textData.trim().startsWith('<!DOCTYPE') || textData.trim().startsWith('<html')) {
+        displayError('Скачалась веб-страница вместо файла CSV. Убедись, что при публикации таблицы выбран формат "CSV".');
         return;
       }
 
-      const dataRows = rows.slice(1);
+      const parsedRows = parseCSV(textData);
+      
+      if (parsedRows.length < 2) {
+        displayError('В таблице слишком мало данных. Нужна хотя бы 1 строка заголовков и 1 строка с товаром.');
+        return;
+      }
 
-      const products = dataRows.map((cols, index) => {
-        const title = cols[0] ? cols[0].trim() : '';
-        if (!title) return null;
+      // Пропускаем первую строку (заголовки)
+      const productRows = parsedRows.slice(1);
 
-        const priceStr = cols[1] ? cols[1].trim() : '0';
-        const price = Number(priceStr.replace(/[^\d]/g, '')) || 0;
+      // Формируем массив объектов
+      const finalProducts = productRows.map((cols, index) => {
+        const name = cols[0] ? cols[0].trim() : '';
+        if (!name) return null;
+
+        const rawPrice = cols[1] ? cols[1].trim() : '0';
+        const numericPrice = Number(rawPrice.replace(/[^\d]/g, '')) || 0;
 
         return {
           id: index,
-          title: title,
-          price: price,
+          title: name,
+          price: numericPrice,
           img: cols[2] ? cols[2].trim() : '',
-          sold: cols[3] ? ['да', 'yes', 'true', '1'].includes(cols[3].trim().toLowerCase()) : false
+          isSold: cols[3] ? ['да', 'yes', 'true', '1'].includes(cols[3].trim().toLowerCase()) : false
         };
-      }).filter(p => p !== null);
+      }).filter(item => item !== null);
 
-      if (products.length === 0) {
-        showError('Данные есть, но не распознались. Проверь столбцы: Название (A), Цена (B), Фото (C).');
+      if (finalProducts.length === 0) {
+        displayError('Строки есть, но названия товаров пустые. Проверь столбец A.');
         return;
       }
 
-      document.getElementById('debugBox').style.display = 'none';
-      document.getElementById('catalogGrid').innerHTML = products.map(p => `
+      // Отрисовка
+      document.getElementById('errorPanel').style.display = 'none';
+      document.getElementById('productsContainer').innerHTML = finalProducts.map(p => `
         <div class="product-card">
           <div class="product-img-wrap">
             ${p.img ? `<img src="${p.img}" class="product-img" onerror="this.src='https://via.placeholder.com/300?text=Ошибка+фото'">` : `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#999;">Нет фото</div>`}
           </div>
           <div class="product-info">
-            ${p.sold ? '<div class="sold-out-badge">Продано</div>' : ''}
+            ${p.isSold ? '<div class="sold-out-badge">Продано</div>' : ''}
             <div class="product-title">${p.title}</div>
             <div class="product-price">${p.price.toLocaleString()} ₽</div>
           </div>
@@ -133,11 +142,12 @@
       `).join('');
 
     } catch (err) {
-      showError('Ошибка: ' + err.message);
+      displayError('Ошибка при загрузке: ' + err.message);
     }
   }
 
-  loadCatalog();
+  // Запуск
+  initCatalog();
 </script>
 </body>
 </html>
