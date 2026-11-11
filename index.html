@@ -241,14 +241,22 @@
   }
   .contact-card h3 { font-size: 28px; margin-bottom: 16px; }
   .contact-card p { color: var(--text-dim); font-size: 16px; margin-bottom: 32px; line-height: 1.6; }
-  .contact-btn-vk {
+  
+  .social-links { display: flex; flex-direction: column; gap: 12px; }
+  .social-btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-    background: #0077FF; color: #fff; text-decoration: none;
-    padding: 18px 32px; border-radius: 16px; font-weight: 700; font-size: 17px;
-    box-shadow: 0 10px 30px rgba(0, 119, 255, 0.3); transition: all 0.3s; width: 100%;
+    color: #fff; text-decoration: none; padding: 16px 24px; border-radius: 16px;
+    font-weight: 700; font-size: 16px; transition: all 0.3s; width: 100%;
   }
-  .contact-btn-vk:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0, 119, 255, 0.4); background: #0066DD; }
-  .contact-btn-vk svg { width: 24px; height: 24px; }
+  .social-btn svg { width: 24px; height: 24px; }
+  .social-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+  
+  .btn-vk { background: #0077FF; }
+  .btn-vk:hover { background: #0066DD; }
+  .btn-tg { background: #229ED9; }
+  .btn-tg:hover { background: #1A84B8; }
+  .btn-max { background: #8A2BE2; }
+  .btn-max:hover { background: #721BBD; }
 
   /* --- НАВЕРХ --- */
   .scroll-top-btn {
@@ -444,15 +452,29 @@
     <div style="text-align: center;">
       <div class="section-label">Контакты</div>
       <h2 class="section-title">Как связаться</h2>
-      <p class="section-sub">Остались вопросы? Напишите мне!</p>
+      <p class="section-sub">Выберите удобный мессенджер, и я отвечу вам в течение дня!</p>
     </div>
     <div class="contact-card">
       <h3>Я всегда на связи</h3>
       <p>Отвечаю на сообщения в течение дня. Буду рада обсудить детали заказа или помочь с выбором.</p>
-      <a href="https://vk.com/" id="vkContactLink" target="_blank" class="contact-btn-vk">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.575 2.389 7.35 2.389z"/></svg>
-        Написать в ВКонтакте
-      </a>
+      
+      <div class="social-links">
+        <!-- Ссылки на соцсети задаются в скрипте -->
+        <a href="#" id="linkVK" target="_blank" class="social-btn btn-vk">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.575 2.389 7.35 2.389z"/></svg>
+          Написать в ВКонтакте
+        </a>
+        
+        <a href="#" id="linkTG" target="_blank" class="social-btn btn-tg">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.26-1.91.178-.191 3.257-2.983 3.318-3.237.007-.031.014-.146-.056-.212-.07-.066-.174-.043-.25-.025-.109.026-1.835 1.165-5.178 3.417-.491.337-.933.5-1.328.49-.436-.01-1.278-.246-1.902-.45-.764-.248-1.37-.38-1.315-.803.028-.22.33-.446.908-.677 3.565-1.55 5.94-2.574 7.126-3.073 3.388-1.408 4.092-1.654 4.55-1.662z"/></svg>
+          Написать в Telegram
+        </a>
+        
+        <a href="#" id="linkMAX" target="_blank" class="social-btn btn-max">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+          Написать в MAX
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -482,9 +504,9 @@
     <h2>Оформление</h2>
     <div class="modal-sub">Оставьте контакты, и мы свяжемся с вами.</div>
     <div class="form-group"><label>Ваше имя</label><input type="text" id="clientName" placeholder="Анна"></div>
-    <div class="form-group"><label>Телефон или ВК</label><input type="text" id="clientContact" placeholder="+7 (999) 123-45-67"></div>
+    <div class="form-group"><label>Телефон или ВК/ТГ</label><input type="text" id="clientContact" placeholder="+7 (999) 123-45-67"></div>
     <div class="form-group"><label>Комментарий</label><textarea id="clientComment" rows="2" placeholder="Пожелания..."></textarea></div>
-    <button class="submit-btn" id="submitBtn" onclick="submitOrder()">Отправить заказ</button>
+    <button class="submit-btn" id="submitBtn" onclick="submitOrder()">Сформировать заказ</button>
     <button class="cancel-btn" onclick="closeCheckout()">Отмена</button>
   </div>
 </div>
@@ -493,13 +515,21 @@
 
 <script>
   // ==========================================
-  // 1. НАСТРОЙКИ (ВСТАВЬ ССЫЛКУ НА ВК МАМЫ)
+  // 1. НАСТРОЙКИ (ВСТАВЬ СВОИ ССЫЛКИ)
   // ==========================================
-  const MOM_VK_LINK = 'https://vk.com/'; 
-  document.getElementById('vkContactLink').href = MOM_VK_LINK;
-
+  
+  // Ссылки на мессенджеры мамы:
+  const LINK_VK = 'https://vk.com/'; // Например: https://vk.com/id123456789
+  const LINK_TG = 'https://t.me/'; // Например: https://t.me/lumia_shop
+  const LINK_MAX = 'https://max.ru/'; // Ссылка на профиль в MAX
+  
   // Ссылка на Google Таблицу (уже вставлена)
   const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQKyqrzk1YSp8N2qk90zEJFLL7I3EZPgdDOcRzJibwWgriJfgkNdF4iGZcF0zVaLmR6YC6k1TTuH1xo/pub?gid=0&single=true&output=csv';
+
+  // Применяем ссылки к кнопкам
+  document.getElementById('linkVK').href = LINK_VK;
+  document.getElementById('linkTG').href = LINK_TG;
+  document.getElementById('linkMAX').href = LINK_MAX;
 
   let products = [];
   let cart = [];
@@ -538,12 +568,10 @@
   async function loadCatalog() {
     const grid = document.getElementById('catalogGrid');
     try {
-      // Запрос к таблице (с защитой от кэша)
       const response = await fetch(SHEET_CSV_URL + '&t=' + Date.now());
       if (!response.ok) throw new Error('Ошибка сети');
       
       const text = await response.text();
-      // Проверка, что скачался именно CSV, а не HTML-страница
       if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
         throw new Error('Неверная ссылка');
       }
@@ -551,7 +579,6 @@
       const rows = parseCSV(text);
       if (rows.length < 2) throw new Error('Мало данных');
 
-      // Формируем список товаров
       products = rows.slice(1).map((cols, index) => {
         const name = cols[0] ? cols[0].trim() : '';
         if (!name) return null; 
@@ -561,7 +588,7 @@
           title: name,
           price: cols[1] ? Number(cols[1].replace(/[^\d]/g, '')) || 0 : 0,
           img: cols[2] ? cols[2].trim() : '',
-          sold: cols[3] ? ['да', 'yes', 'true', '1'].includes(cols[3].trim().toLowerCase()) : false
+          sold: false // Если товар на Главной, значит он в наличии
         };
       }).filter(p => p !== null);
 
@@ -579,22 +606,6 @@
     document.getElementById('catalogGrid').innerHTML = products.map(p => {
       const cartItem = cart.find(item => item.id === p.id);
       const qty = cartItem ? cartItem.qty : 0;
-
-      if (p.sold) {
-        return `
-          <div class="product-card">
-            <div class="product-img-wrap">
-              <img src="${p.img}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300?text=Нет+фото'">
-              <div class="sold-out-overlay"><div class="sold-out-badge">Продано</div></div>
-            </div>
-            <div class="product-info">
-              <div class="product-title">${p.title}</div>
-              <div class="product-price">${p.price.toLocaleString()} ₽</div>
-              <div class="product-action"><button class="add-btn disabled" disabled>Нет в наличии</button></div>
-            </div>
-          </div>
-        `;
-      }
 
       const actionHtml = qty > 0
         ? `<div class="qty-controls">
@@ -619,7 +630,6 @@
 
   function addToCart(id) {
     const product = products.find(p => p.id === id);
-    if (product.sold) return;
     const existing = cart.find(item => item.id === id);
     if (existing) existing.qty++;
     else cart.push({ ...product, qty: 1 });
@@ -690,6 +700,7 @@
     });
     message += `\n💰 Итого: ${total.toLocaleString()} ₽`;
 
+    // Копируем текст в буфер и очищаем корзину
     navigator.clipboard.writeText(message).then(() => {
       cart = [];
       renderCatalog(); updateCart(); closeCheckout(); toggleCart();
@@ -697,13 +708,13 @@
       document.getElementById('clientContact').value = '';
       document.getElementById('clientComment').value = '';
 
+      // Выводим сообщение, что текст скопирован
       setTimeout(() => {
-        if (confirm('✅ Заказ сформирован!\n\nТекст заказа уже скопирован. Нажмите "ОК", чтобы открыть чат с мамой в ВК, и просто вставьте текст в сообщение.')) {
-          window.open(MOM_VK_LINK, '_blank');
-        }
+        alert('✅ Текст заказа скопирован!\n\nТеперь выберите удобный мессенджер (ВК, Телеграм или MAX) в разделе «Контакты» и просто вставьте текст в чат с мамой.');
       }, 300);
     }).catch(err => {
-      alert('Ваш заказ:\n\n' + message + '\n\nПожалуйста, скопируйте этот текст и отправьте его в ВК.');
+      // Если копирование запрещено (старые браузеры), показываем текст
+      alert('Ваш заказ:\n\n' + message + '\n\nПожалуйста, скопируйте этот текст и отправьте его маме в любом мессенджере.');
     });
   }
 
