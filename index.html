@@ -510,13 +510,12 @@
     if (current !== '' || row.length > 0) { row.push(current); result.push(row); }
     return result;
   }
-
   async function loadCatalog() {
     const grid = document.getElementById('catalogGrid');
     try {
       const response = await fetch(SHEET_CSV_URL + '&t=' + Date.now());
       if (!response.ok) throw new Error('Ошибка сети');
-
+      
       const text = await response.text();
       if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
         throw new Error('Неверная ссылка');
@@ -525,31 +524,21 @@
       const rows = parseCSV(text);
       if (rows.length < 2) throw new Error('Мало данных');
 
-      // Обрабатываем данные из таблицы
       products = rows.slice(1).map((cols, index) => {
         const name = cols[0] ? cols[0].trim() : '';
-        if (!name) return null;
-
-        // --- УМНАЯ ОБРАБОТКА ССЫЛОК ---
-        let rawImg = cols[2] ? cols[2].trim() : '';
-        let finalImg = rawImg;
-
-        if (rawImg) {
-          // 1. Если это Google Диск
-          if (rawImg.includes('drive.google.com')) {
-            // Ищем ID файла (длинный набор букв)
-            const gDriveId = rawImg.match(/\/d\/([a-zA-Z0-9_-]+)/);
-            if (gDriveId && gDriveId[1]) {
-              finalImg = `https://drive.google.com/uc?export=view&id=${gDriveId[1]}`;
-            }
-          }
-          // 2. Если это Яндекс.Диск (ссылка вида disk.yandex.ru/i/XXXXX)
-          else if (rawImg.includes('disk.yandex.ru/i/')) {
-            const yDiskId = rawImg.match(/\/i\/([a-zA-Z0-9_-]+)/);
-            if (yDiskId && yDiskId[1]) {
-              // Для Яндекса нужна ссылка вида "get-image"
-              finalImg = `https://downloader.disk.yandex.ru/preview/${yDiskId[1]}/orig`;
-            }
+        if (!name) return null; 
+        
+        // --- МАГИЯ ОЧИСТКИ ССЫЛКИ ---
+        let imgUrl = cols[2] ? cols[2].trim() : '';
+        
+        // Если Google превратил текст в ссылку (добавил кавычки или пробелы), убираем это
+        if (imgUrl) {
+          // Ищем внутри текста ссылку, которая начинается на http
+          const match = imgUrl.match(/https?:\/\/[^\s"'<>]+/);
+          if (match) {
+            imgUrl = match[0]; // Берем только чистую ссылку
+          } else {
+            imgUrl = ''; // Если ссылки нет, ставим пустоту
           }
         }
 
@@ -557,7 +546,7 @@
           id: index,
           title: name,
           price: cols[1] ? Number(cols[1].replace(/[^\d]/g, '')) || 0 : 0,
-          img: finalImg,
+          img: imgUrl,
           desc: cols[3] ? cols[3].trim() : 'Описание скоро появится...'
         };
       }).filter(p => p !== null);
@@ -565,7 +554,7 @@
       renderCatalog();
     } catch (error) {
       console.error('Ошибка загрузки:', error);
-      grid.innerHTML = `<div class="loading-text" style="color:#b91c1c;">Не удалось загрузить каталог.<br><br><small>Проверь доступ к таблице.</small></div>`;
+      grid.innerHTML = `<div class="loading-text" style="color:#b91c1c;">Не удалось загрузить каталог.<br><br><small>Проверь ссылку на таблицу.</small></div>`;
     }
   }
 
