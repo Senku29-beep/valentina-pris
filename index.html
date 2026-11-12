@@ -37,8 +37,8 @@
     font-size: 16px;
   }
 
-  h1, h2, h3, .logo { 
-    font-family: 'Playfair Display', serif; 
+  h1, h2, h3, .logo {
+    font-family: 'Playfair Display', serif;
     letter-spacing: 0;
     font-weight: 600;
   }
@@ -57,9 +57,9 @@
     z-index: 100;
   }
   .logo {
-    font-size: 24px; 
+    font-size: 24px;
     color: var(--dark-green);
-    text-decoration: none; 
+    text-decoration: none;
     display: flex;
     flex-direction: column;
     line-height: 1;
@@ -80,7 +80,7 @@
     transition: all 0.3s; position: relative; padding: 4px 0;
   }
   .nav-links a:hover { color: var(--accent); }
-  
+
   .cart-btn {
     background: var(--dark-green); color: #fff; border: none;
     padding: 12px 24px; border-radius: 8px; font-weight: 500; font-size: 14px;
@@ -181,7 +181,7 @@
     cursor: pointer; transition: all 0.3s;
   }
   .add-btn:hover { background: var(--dark-green); color: #fff; }
-  
+
   .qty-controls {
     display: flex; align-items: center; justify-content: space-between;
     width: 100%; border: 1px solid var(--dark-green); border-radius: 8px; padding: 4px;
@@ -192,6 +192,39 @@
   }
   .qty-btn:hover { background: #f0ebe1; border-radius: 4px; }
   .qty-value { color: var(--dark-green); font-weight: 600; font-size: 16px; }
+
+
+    /* --- ПОИСК --- */
+  .search-wrapper {
+    max-width: 500px;
+    margin: 0 auto 40px auto;
+    position: relative;
+  }
+  .search-input {
+    width: 100%;
+    padding: 16px 20px 16px 50px;
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    font-family: inherit;
+    font-size: 16px;
+    background: var(--surface-solid);
+    color: var(--text);
+    transition: all 0.3s;
+    box-shadow: var(--shadow-sm);
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(146, 94, 41, 0.1);
+  }
+  .search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    pointer-events: none;
+  }
 
   /* --- ОТЗЫВЫ --- */
   .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
@@ -214,7 +247,7 @@
   }
   .contact-card h3 { font-size: 28px; margin-bottom: 16px; color: var(--dark-green); }
   .contact-card p { color: var(--text-dim); font-size: 15px; margin-bottom: 32px; line-height: 1.6; }
-  
+
   .social-links { display: flex; flex-direction: column; gap: 12px; }
   .social-btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 12px;
@@ -224,7 +257,7 @@
   }
   .social-btn svg { width: 20px; height: 20px; }
   .social-btn:hover { background: var(--bg); border-color: var(--accent); color: var(--accent); }
-  
+
   /* --- НАВЕРХ --- */
   .scroll-top-btn {
     position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px;
@@ -279,7 +312,7 @@
     font-family: inherit; font-size: 15px; background: var(--surface-solid); transition: all 0.2s;
   }
   .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
-  
+
   /* Кнопки выбора мессенджера в модалке */
   .modal-messengers { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
   .modal-messengers p { font-size: 13px; color: var(--text-dim); text-align: center; margin-bottom: 4px; }
@@ -291,7 +324,7 @@
   }
   .messenger-choice-btn:hover { border-color: var(--accent); color: var(--accent); }
   .messenger-choice-btn svg { width: 18px; height: 18px; }
-  
+
   .submit-btn {
     width: 100%; background: var(--accent); color: #fff; border: none;
     padding: 16px; border-radius: 8px; font-size: 15px; font-weight: 500;
@@ -299,7 +332,7 @@
   }
   .submit-btn:hover { background: var(--accent-hover); }
   .cancel-btn { width: 100%; background: transparent; color: var(--text-dim); border: none; padding: 14px; font-size: 14px; cursor: pointer; margin-top: 8px; }
-  
+
   .toast {
     position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
     background: var(--dark-green); color: #fff; padding: 14px 28px; border-radius: 8px;
@@ -353,7 +386,7 @@
 <section id="hero" class="hero">
   <!-- Логотип -->
   <img src="logo.jpg" alt="Присяжнюк" class="hero-logo-img">
-  
+
   <h1>Гармонизаторы из натуральных камней</h1>
   <p>Авторские украшения ручной работы. Индивидуальный подбор под ваш запрос: финансы, карьера, любовь, защита.</p>
   <div class="hero-buttons">
@@ -387,7 +420,11 @@
     <div class="section-label">Коллекция</div>
     <h2 class="section-title">Каталог изделий</h2>
     <p class="section-sub">Выберите украшение, которое откликается именно вам</p>
-    
+        <!-- Строка поиска -->
+    <div class="search-wrapper">
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="Поиск по названию или камню..." oninput="filterCatalog()">
+    </div>
     <div class="catalog-grid" id="catalogGrid">
       <div class="loading-text">Загрузка товаров...</div>
     </div>
@@ -400,7 +437,7 @@
     <div class="section-label">Отзывы</div>
     <h2 class="section-title">Слова благодарности</h2>
     <p class="section-sub">Что говорят те, кто уже носит мои украшения</p>
-    
+
     <div class="reviews-grid">
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
@@ -427,11 +464,11 @@
     <div class="section-label">Контакты</div>
     <h2 class="section-title">Связаться со мной</h2>
     <p class="section-sub">Выберите удобный мессенджер, и я отвечу вам в течение дня!</p>
-    
+
     <div class="contact-card">
       <h3>Я всегда на связи</h3>
       <p>Отвечаю на сообщения в течение дня. Буду рада обсудить детали заказа, помочь с выбором или ответить на вопросы.</p>
-      
+
       <div class="social-links">
         <a href="#" id="linkVK" target="_blank" class="social-btn">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.575 2.389 7.35 2.389z"/></svg>
@@ -481,12 +518,12 @@
       <button class="submit-btn" id="submitBtn" onclick="submitOrder()">Сформировать заказ</button>
       <button class="cancel-btn" onclick="closeCheckout()">Отмена</button>
     </div>
-    
+
     <!-- Шаг 2: Выбор мессенджера (появляется после формирования) -->
     <div id="modalStep2" style="display: none;">
       <h2 style="color: var(--accent);">Заказ сформирован!</h2>
       <div class="modal-sub">Текст заказа уже скопирован. Просто выберите мессенджер и вставьте его в чат.</div>
-      
+
       <div class="modal-messengers">
         <p>Куда отправить заказ?</p>
         <a href="#" id="modalLinkVK" target="_blank" class="messenger-choice-btn">
@@ -515,16 +552,16 @@
   // ==========================================
   // Вставь реальные ссылки на страницы Валентины
   const LINK_VK = 'https://vk.com/valentina_pris'; // Например
-  const LINK_TG = 'https://t.me/valentina_pris'; 
-  const LINK_MAX = 'https://max.ru/'; 
-  
+  const LINK_TG = 'https://t.me/valentina_pris';
+  const LINK_MAX = 'https://max.ru/';
+
   const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQKyqrzk1YSp8N2qk90zEJFLL7I3EZPgdDOcRzJibwWgriJfgkNdF4iGZcF0zVaLmR6YC6k1TTuH1xo/pub?gid=0&single=true&output=csv';
 
   // Применяем ссылки ко всем кнопкам (и в контактах, и в модалке)
   document.getElementById('linkVK').href = LINK_VK;
   document.getElementById('linkTG').href = LINK_TG;
   document.getElementById('linkMAX').href = LINK_MAX;
-  
+
   document.getElementById('modalLinkVK').href = LINK_VK;
   document.getElementById('modalLinkTG').href = LINK_TG;
   document.getElementById('modalLinkMAX').href = LINK_MAX;
@@ -540,11 +577,11 @@
     let row = [];
     let current = '';
     let inQuotes = false;
-    
+
     for (let i = 0; i < text.length; i++) {
       const char = text[i];
       const nextChar = text[i + 1];
-      
+
       if (char === '"') {
         if (inQuotes && nextChar === '"') { current += '"'; i++; }
         else { inQuotes = !inQuotes; }
@@ -568,7 +605,7 @@
     try {
       const response = await fetch(SHEET_CSV_URL + '&t=' + Date.now());
       if (!response.ok) throw new Error('Ошибка сети');
-      
+
       const text = await response.text();
       if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
         throw new Error('Неверная ссылка');
@@ -580,14 +617,14 @@
       // Делаем sold: false, чтобы показывались ВСЕ товары с листа
       products = rows.slice(1).map((cols, index) => {
         const name = cols[0] ? cols[0].trim() : '';
-        if (!name) return null; 
-        
+        if (!name) return null;
+
         return {
           id: index,
           title: name,
           price: cols[1] ? Number(cols[1].replace(/[^\d]/g, '')) || 0 : 0,
           img: cols[2] ? cols[2].trim() : '',
-          sold: false 
+          sold: false
         };
       }).filter(p => p !== null);
 
@@ -621,7 +658,7 @@
           <button class="share-btn" onclick="shareProduct('${p.title}', ${p.price})" title="Поделиться">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
           </button>
-          
+
           <div class="product-img-wrap"><img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Нет+фото'"></div>
           <div class="product-info">
             <div class="product-title">${p.title}</div>
@@ -725,11 +762,11 @@
       // Очищаем корзину
       cart = [];
       renderCatalog(); updateCart();
-      
+
       // Переключаем модалку на Шаг 2 (выбор мессенджера)
       document.getElementById('modalStep1').style.display = 'none';
       document.getElementById('modalStep2').style.display = 'block';
-      
+
       // Очищаем поля (на будущее)
       document.getElementById('clientName').value = '';
       document.getElementById('clientContact').value = '';
@@ -752,6 +789,59 @@
   });
   function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
+    // ==========================================
+  // 5. ФИЛЬТРАЦИЯ (ПОИСК)
+  // ==========================================
+  function filterCatalog() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const grid = document.getElementById('catalogGrid');
+
+    // Если поиск пустой, показываем все товары
+    if (!query) {
+      renderCatalog();
+      return;
+    }
+
+    // Фильтруем массив товаров
+    const filtered = products.filter(p => p.title.toLowerCase().includes(query));
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="loading-text" style="color:var(--text-dim);">По запросу «${query}» ничего не найдено.</div>`;
+      return;
+    }
+
+    // Отрисовываем только найденные товары (копируем логику из renderCatalog)
+    grid.innerHTML = filtered.map(p => {
+      const cartItem = cart.find(item => item.id === p.id);
+      const qty = cartItem ? cartItem.qty : 0;
+
+      const actionHtml = qty > 0
+        ? `<div class="qty-controls">
+             <button class="qty-btn" onclick="decreaseQty(${p.id})">−</button>
+             <span class="qty-value">${qty}</span>
+             <button class="qty-btn" onclick="increaseQty(${p.id})">+</button>
+           </div>`
+        : `<button class="add-btn" onclick="addToCart(${p.id})">В корзину</button>`;
+
+      const imgUrl = p.img ? p.img : 'https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Нет+фото';
+
+      return `
+        <div class="product-card">
+          <button class="share-btn" onclick="shareProduct('${p.title}', ${p.price})" title="Поделиться">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          </button>
+
+          <div class="product-img-wrap"><img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Нет+фото'"></div>
+          <div class="product-info">
+            <div class="product-title">${p.title}</div>
+            <div class="product-price">${p.price.toLocaleString()} ₽</div>
+            <div class="product-action">${actionHtml}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+  
   loadCatalog();
 </script>
 </body>
