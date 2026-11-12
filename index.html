@@ -604,7 +604,7 @@
   // 3. ОТРИСОВКА
   // ==========================================
   function renderCatalog() {
-    document.getElementById('catalogGrid').innerHTML = products.map(p => {
+    document.getElementById('catalogGrid').innerHTML = products.map((p, index) => {
       const cartItem = cart.find(item => item.id === p.id);
       const qty = cartItem ? cartItem.qty : 0;
 
@@ -648,7 +648,7 @@
       return;
     }
 
-    grid.innerHTML = filtered.map(p => {
+    grid.innerHTML = filtered.map((p, index) => {
       const cartItem = cart.find(item => item.id === p.id);
       const qty = cartItem ? cartItem.qty : 0;
       const actionHtml = qty > 0
