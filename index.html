@@ -516,7 +516,7 @@
     try {
       const response = await fetch(SHEET_CSV_URL + '&t=' + Date.now());
       if (!response.ok) throw new Error('Ошибка сети');
-      
+
       const text = await response.text();
       if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
         throw new Error('Неверная ссылка');
@@ -528,8 +528,8 @@
       // Обрабатываем данные из таблицы
       products = rows.slice(1).map((cols, index) => {
         const name = cols[0] ? cols[0].trim() : '';
-        if (!name) return null; 
-        
+        if (!name) return null;
+
         // --- УМНАЯ ОБРАБОТКА ССЫЛОК ---
         let rawImg = cols[2] ? cols[2].trim() : '';
         let finalImg = rawImg;
@@ -542,7 +542,7 @@
             if (gDriveId && gDriveId[1]) {
               finalImg = `https://drive.google.com/uc?export=view&id=${gDriveId[1]}`;
             }
-          } 
+          }
           // 2. Если это Яндекс.Диск (ссылка вида disk.yandex.ru/i/XXXXX)
           else if (rawImg.includes('disk.yandex.ru/i/')) {
             const yDiskId = rawImg.match(/\/i\/([a-zA-Z0-9_-]+)/);
@@ -552,7 +552,7 @@
             }
           }
         }
-        
+
         return {
           id: index,
           title: name,
@@ -584,8 +584,9 @@
              <button class="qty-btn" onclick="event.stopPropagation(); increaseQty(${p.id})">+</button>
            </div>`
         : `<button class="add-btn" onclick="event.stopPropagation(); addToCart(${p.id})">В корзину</button>`;
-
-      const imgUrl = p.img ? p.img : 'https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Нет+фото';
+// Если ссылка есть, но она битая — выведем это на экран
+const imgUrl = p.img ? p.img : 'https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Нет+фото';
+const onErrorStr = p.img ? `this.onerror=null; this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Ошибка+ссылки'; alert('Сайт не смог загрузить фото по ссылке: ${p.img}');` : '';
 
       return `
         <div class="product-card" onclick="openProductModal(${p.id})">
@@ -593,7 +594,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
           </button>
 
-          <div class="product-img-wrap"><img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Нет+фото'"></div>
+          <div class="product-img-wrap"><img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="${onErrorStr}"></div>
           <div class="product-info">
             <div class="product-title">${p.title}</div>
             <div class="product-price">${p.price.toLocaleString()} ₽</div>
