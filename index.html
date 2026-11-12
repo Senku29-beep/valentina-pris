@@ -524,24 +524,21 @@
       const rows = parseCSV(text);
       if (rows.length < 2) throw new Error('Мало данных');
 
+           // Обрабатываем данные из таблицы
       products = rows.slice(1).map((cols, index) => {
         const name = cols[0] ? cols[0].trim() : '';
         if (!name) return null; 
         
-        // --- МАГИЯ ОЧИСТКИ ССЫЛКИ ---
+        // --- ЗАЩИТА ССЫЛОК ---
         let imgUrl = cols[2] ? cols[2].trim() : '';
         
         if (imgUrl) {
-          // Очищаем от невидимых пробелов и переносов строк
-          imgUrl = imgUrl.replace(/[\n\r\t]/g, '').trim();
+          // 1. Убираем любые невидимые пробелы, переносы строк и кавычки
+          imgUrl = imgUrl.replace(/[\n\r\t"']/g, '').trim();
           
-          // Если внутри текста есть ссылка на Google Диск, преобразуем её
-          if (imgUrl.includes('drive.google.com')) {
-            const gDriveId = imgUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
-            if (gDriveId && gDriveId[1]) {
-              imgUrl = `https://drive.google.com/uc?export=view&id=${gDriveId[1]}`;
-            }
-          }
+          // 2. Если вдруг ссылка склеилась с текстом, вытаскиваем только адрес
+          const match = imgUrl.match(/https?:\/\/[^\s]+/);
+          if (match) imgUrl = match[0];
         }
 
         return {
