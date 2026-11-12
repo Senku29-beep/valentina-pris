@@ -36,8 +36,8 @@
     font-size: 16px;
   }
 
-  h1, h2, h3, .logo { 
-    font-family: 'Playfair Display', serif; 
+  h1, h2, h3, .logo {
+    font-family: 'Playfair Display', serif;
     letter-spacing: 0;
     font-weight: 600;
   }
@@ -61,7 +61,7 @@
   .nav-links { display: flex; gap: 32px; }
   .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; transition: all 0.3s; position: relative; padding: 4px 0; }
   .nav-links a:hover { color: var(--accent); }
-  
+
   .cart-btn { background: var(--dark-green); color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 500; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.3s; font-family: 'Inter', sans-serif; }
   .cart-btn:hover { background: var(--accent); }
   .cart-badge { background: var(--bg); color: var(--dark-green); border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
@@ -119,7 +119,7 @@
 
   .add-btn { width: 100%; background: transparent; color: var(--dark-green); border: 1px solid var(--dark-green); padding: 12px; border-radius: 8px; font-weight: 500; font-size: 14px; cursor: pointer; transition: all 0.3s; }
   .add-btn:hover { background: var(--dark-green); color: #fff; }
-  
+
   .qty-controls { display: flex; align-items: center; justify-content: space-between; width: 100%; border: 1px solid var(--dark-green); border-radius: 8px; padding: 4px; }
   .qty-btn { background: transparent; border: none; color: var(--dark-green); font-size: 20px; cursor: pointer; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
   .qty-btn:hover { background: #f0ebe1; border-radius: 4px; }
@@ -130,7 +130,7 @@
   .product-modal-overlay.active { opacity: 1; pointer-events: auto; }
   .product-modal { background: var(--bg); border-radius: 16px; width: 100%; max-width: 900px; max-height: 90vh; display: flex; flex-direction: row; overflow: hidden; box-shadow: var(--shadow-lg); position: relative; transform: translateY(20px); transition: 0.3s; }
   .product-modal-overlay.active .product-modal { transform: translateY(0); }
-  
+
   .pm-close { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.8); border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; color: var(--text); transition: 0.2s; }
   .pm-close:hover { background: var(--dark-green); color: #fff; }
 
@@ -141,11 +141,11 @@
   .pm-title { font-size: 32px; font-weight: 600; margin-bottom: 8px; color: var(--dark-green); font-family: 'Playfair Display', serif; }
   .pm-price { font-size: 24px; font-weight: 500; color: var(--accent); margin-bottom: 24px; }
   .pm-desc { font-size: 15px; line-height: 1.7; color: var(--text-dim); margin-bottom: 32px; flex: 1; white-space: pre-wrap; }
-  
+
   .pm-actions { margin-top: auto; }
   .pm-add-btn { width: 100%; background: var(--dark-green); color: #fff; border: none; padding: 16px; border-radius: 8px; font-weight: 500; font-size: 16px; cursor: pointer; transition: all 0.3s; }
   .pm-add-btn:hover { background: var(--accent); }
-  
+
   /* --- ОТЗЫВЫ --- */
   .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
   .review-card { background: var(--surface-solid); border-radius: var(--radius); padding: 32px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
@@ -160,12 +160,12 @@
   .contact-card { background: var(--surface-solid); padding: 60px 40px; border-radius: var(--radius); box-shadow: var(--shadow-lg); max-width: 560px; margin: 0 auto; text-align: center; border: 1px solid var(--border); }
   .contact-card h3 { font-size: 28px; margin-bottom: 16px; color: var(--dark-green); }
   .contact-card p { color: var(--text-dim); font-size: 15px; margin-bottom: 32px; line-height: 1.6; }
-  
+
   .social-links { display: flex; flex-direction: column; gap: 12px; }
   .social-btn { display: inline-flex; align-items: center; justify-content: center; gap: 12px; text-decoration: none; padding: 16px 24px; border-radius: 8px; font-weight: 500; font-size: 15px; transition: all 0.3s; width: 100%; border: 1px solid var(--border); color: var(--text); }
   .social-btn svg { width: 20px; height: 20px; }
   .social-btn:hover { background: var(--bg); border-color: var(--accent); color: var(--accent); }
-  
+
   /* --- НАВЕРХ --- */
   .scroll-top-btn { position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px; border-radius: 50%; background: var(--dark-green); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-lg); opacity: 0; pointer-events: none; transform: translateY(20px); transition: all 0.3s; z-index: 50; }
   .scroll-top-btn.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
@@ -203,17 +203,17 @@
   .form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; color: var(--text-dim); }
   .form-group input, .form-group textarea { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 15px; background: var(--surface-solid); transition: all 0.2s; }
   .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
-  
+
   .modal-messengers { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
   .modal-messengers p { font-size: 13px; color: var(--text-dim); text-align: center; margin-bottom: 4px; }
   .messenger-choice-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid var(--border); color: var(--text); background: var(--surface-solid); cursor: pointer; transition: 0.2s; }
   .messenger-choice-btn:hover { border-color: var(--accent); color: var(--accent); }
   .messenger-choice-btn svg { width: 18px; height: 18px; }
-  
+
   .submit-btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: 16px; border-radius: 8px; font-size: 15px; font-weight: 500; cursor: pointer; margin-top: 8px; transition: all 0.3s; }
   .submit-btn:hover { background: var(--accent-hover); }
   .cancel-btn { width: 100%; background: transparent; color: var(--text-dim); border: none; padding: 14px; font-size: 14px; cursor: pointer; margin-top: 8px; }
-  
+
   .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--dark-green); color: #fff; padding: 14px 28px; border-radius: 8px; font-weight: 500; font-size: 14px; opacity: 0; transition: all 0.3s; z-index: 400; pointer-events: none; box-shadow: var(--shadow-lg); text-align: center; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
@@ -298,7 +298,7 @@
     <div class="section-label">Коллекция</div>
     <h2 class="section-title">Каталог изделий</h2>
     <p class="section-sub">Выберите украшение, которое откликается именно вам</p>
-    
+
     <!-- Поиск -->
     <div class="search-wrapper">
       <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -317,7 +317,7 @@
     <div class="section-label">Отзывы</div>
     <h2 class="section-title">Слова благодарности</h2>
     <p class="section-sub">Что говорят те, кто уже носит мои украшения</p>
-    
+
     <div class="reviews-grid">
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
@@ -344,11 +344,11 @@
     <div class="section-label">Контакты</div>
     <h2 class="section-title">Связаться со мной</h2>
     <p class="section-sub">Выберите удобный мессенджер, и я отвечу вам в течение дня!</p>
-    
+
     <div class="contact-card">
       <h3>Я всегда на связи</h3>
       <p>Отвечаю на сообщения в течение дня. Буду рада обсудить детали заказа, помочь с выбором или ответить на вопросы.</p>
-      
+
       <div class="social-links">
         <a href="#" id="linkVK" target="_blank" class="social-btn">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.575 2.389 7.35 2.389z"/></svg>
@@ -416,11 +416,11 @@
       <button class="submit-btn" id="submitBtn" onclick="submitOrder()">Сформировать заказ</button>
       <button class="cancel-btn" onclick="closeCheckout()">Отмена</button>
     </div>
-    
+
     <div id="modalStep2" style="display: none;">
       <h2 style="color: var(--accent);">Заказ сформирован!</h2>
       <div class="modal-sub">Текст заказа уже скопирован. Просто выберите мессенджер и вставьте его в чат.</div>
-      
+
       <div class="modal-messengers">
         <p>Куда отправить заказ?</p>
         <a href="#" id="modalLinkVK" target="_blank" class="messenger-choice-btn">
@@ -447,10 +447,10 @@
   // ==========================================
   // 1. НАСТРОЙКИ
   // ==========================================
-  const LINK_VK = 'https://vk.com/valentina_pris'; 
-  const LINK_TG = 'https://t.me/valentina_pris'; 
-  const LINK_MAX = 'https://max.ru/'; 
-  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQKyqrzk1YSp8N2qk90zEJFLL7I3EZPgdDOcRzJibwWgriJfgkNdF4iGZcF0zVaLmR6YC6k1TTuH1xo/pub?gid=0&single=true&output=csv';
+  const LINK_VK = 'https://vk.com/valentina_pris';
+  const LINK_TG = 'https://t.me/valentina_pris';
+  const LINK_MAX = 'https://max.ru/';
+  const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1_cgap3xdlFNLLxKsA28vnR4fjxsE-5_FBBfB6h-96xk/gviz/tq?tqx=out:csv&sheet=0';
 
   document.getElementById('linkVK').href = LINK_VK;
   document.getElementById('linkTG').href = LINK_TG;
@@ -470,11 +470,11 @@
     let row = [];
     let current = '';
     let inQuotes = false;
-    
+
     for (let i = 0; i < text.length; i++) {
       const char = text[i];
       const nextChar = text[i + 1];
-      
+
       if (char === '"') {
         if (inQuotes && nextChar === '"') { current += '"'; i++; }
         else { inQuotes = !inQuotes; }
@@ -498,7 +498,7 @@
     try {
       const response = await fetch(SHEET_CSV_URL + '&t=' + Date.now());
       if (!response.ok) throw new Error('Ошибка сети');
-      
+
       const text = await response.text();
       if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
         throw new Error('Неверная ссылка');
@@ -510,8 +510,8 @@
       // Обрабатываем 4 столбца: Название, Цена, Фото, Описание
       products = rows.slice(1).map((cols, index) => {
         const name = cols[0] ? cols[0].trim() : '';
-        if (!name) return null; 
-        
+        if (!name) return null;
+
         return {
           id: index,
           title: name,
@@ -551,7 +551,7 @@
           <button class="share-btn" onclick="event.stopPropagation(); shareProduct('${p.title}', ${p.price})" title="Поделиться">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
           </button>
-          
+
           <div class="product-img-wrap"><img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Нет+фото'"></div>
           <div class="product-info">
             <div class="product-title">${p.title}</div>
@@ -566,7 +566,7 @@
   function filterCatalog() {
     const query = document.getElementById('searchInput').value.toLowerCase().trim();
     const grid = document.getElementById('catalogGrid');
-    
+
     if (!query) { renderCatalog(); return; }
 
     const filtered = products.filter(p => p.title.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
@@ -594,7 +594,7 @@
           <button class="share-btn" onclick="event.stopPropagation(); shareProduct('${p.title}', ${p.price})" title="Поделиться">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
           </button>
-          
+
           <div class="product-img-wrap"><img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Нет+фото'"></div>
           <div class="product-info">
             <div class="product-title">${p.title}</div>
@@ -731,10 +731,10 @@
     navigator.clipboard.writeText(message).then(() => {
       cart = [];
       renderCatalog(); updateCart();
-      
+
       document.getElementById('modalStep1').style.display = 'none';
       document.getElementById('modalStep2').style.display = 'block';
-      
+
       document.getElementById('clientName').value = '';
       document.getElementById('clientContact').value = '';
       document.getElementById('clientComment').value = '';
