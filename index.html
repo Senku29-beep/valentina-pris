@@ -503,30 +503,20 @@
     return result;
   }
 
-  async function loadCatalog() {
-    const grid = document.getElementById('catalogGrid');
-    try {
-      const response = await fetch(SHEET_CSV_URL + '&t=' + Date.now());
-      if (!response.ok) throw new Error('Ошибка сети');
-
-      const text = await response.text();
-      if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
-        throw new Error('Неверная ссылка');
-      }
-
-      const rows = parseCSV(text);
-      if (rows.length < 2) throw new Error('Мало данных');
-
       products = rows.slice(1).map((cols, index) => {
         const name = cols[0] ? cols[0].trim() : '';
-        if (!name) return null;
-
+        if (!name) return null; 
+        
         let imgUrl = cols[2] ? cols[2].trim() : '';
-        // Очищаем от мусора
-        if (imgUrl) {
-          imgUrl = imgUrl.replace(/[\n\r\t"']/g, '').trim();
-          const match = imgUrl.match(/https?:\/\/[^\s]+/);
-          if (match) imgUrl = match[0];
+
+        // --- УМНАЯ ОБРАБОТКА GOOGLE ДИСКА ---
+        if (imgUrl && imgUrl.includes('drive.google.com')) {
+          // Ищем ID файла (набор букв и цифр между /d/ и /)
+          const match = imgUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
+          if (match && match[1]) {
+            // Превращаем в рабочую ссылку через thumbnail
+            imgUrl = `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
+          }
         }
 
         return {
@@ -537,13 +527,6 @@
           desc: cols[3] ? cols[3].trim() : 'Описание скоро появится...'
         };
       }).filter(p => p !== null);
-
-      renderCatalog();
-    } catch (error) {
-      console.error('Ошибка загрузки:', error);
-      grid.innerHTML = `<div class="loading-text" style="color:#b91c1c;">Не удалось загрузить каталог.<br><br><small>${error.message}</small></div>`;
-    }
-  }
 
   // ==========================================
   // ОТРИСОВКА
