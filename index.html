@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Валентина Присяжнюк | Браслеты из натуральных камней и гармонизаторы</title>
 <meta name="description" content="Авторские украшения из натуральных камней от практикующего литотерапевта Валентины Присяжнюк. Индивидуальный подбор для гармонии, защиты и удачи. Доставка по России.">
+<meta name="keywords" content="литотерапия, браслеты из камней, купить украшения ручной работы, гармонизаторы, камни для удачи, Валентина Присяжнюк">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -164,13 +166,12 @@
   .social-btn svg { width: 20px; height: 20px; }
   .social-btn:hover { background: var(--bg); border-color: var(--accent); color: var(--accent); }
 
-  /* --- НАВЕРХ --- */
+  /* --- НАВЕРХ, КОРЗИНА, МОДАЛКА ОФОРМЛЕНИЯ --- */
   .scroll-top-btn { position: fixed; bottom: 32px; right: 32px; width: 48px; height: 48px; border-radius: 50%; background: var(--dark-green); color: #fff; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-lg); opacity: 0; pointer-events: none; transform: translateY(20px); transition: all 0.3s; z-index: 50; }
   .scroll-top-btn.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
   .scroll-top-btn:hover { background: var(--accent); }
   .scroll-top-btn svg { width: 20px; height: 20px; }
 
-  /* --- КОРЗИНА --- */
   .cart-overlay { position: fixed; inset: 0; background: rgba(32, 29, 18, 0.6); opacity: 0; pointer-events: none; transition: 0.3s; z-index: 200; backdrop-filter: blur(4px); }
   .cart-overlay.active { opacity: 1; pointer-events: auto; }
   .cart-panel { position: fixed; top: 0; right: -480px; width: 100%; max-width: 420px; height: 100%; background: var(--bg); z-index: 201; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: right 0.4s ease; display: flex; flex-direction: column; }
@@ -191,7 +192,6 @@
   .checkout-btn { width: 100%; background: var(--dark-green); color: #fff; border: none; padding: 16px; border-radius: 8px; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.3s; }
   .checkout-btn:hover { background: var(--accent); }
 
-  /* --- МОДАЛКА ОФОРМЛЕНИЯ --- */
   .modal-overlay { position: fixed; inset: 0; background: rgba(32, 29, 18, 0.6); display: flex; align-items: center; justify-content: center; z-index: 300; opacity: 0; pointer-events: none; transition: 0.3s; padding: 20px; backdrop-filter: blur(4px); }
   .modal-overlay.active { opacity: 1; pointer-events: auto; }
   .modal { background: var(--bg); border-radius: 16px; padding: 32px; width: 100%; max-width: 440px; box-shadow: var(--shadow-lg); }
@@ -201,43 +201,26 @@
   .form-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; color: var(--text-dim); }
   .form-group input, .form-group textarea { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 15px; background: var(--surface-solid); transition: all 0.2s; }
   .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
-
   .modal-messengers { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
   .modal-messengers p { font-size: 13px; color: var(--text-dim); text-align: center; margin-bottom: 4px; }
   .messenger-choice-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid var(--border); color: var(--text); background: var(--surface-solid); cursor: pointer; transition: 0.2s; }
   .messenger-choice-btn:hover { border-color: var(--accent); color: var(--accent); }
   .messenger-choice-btn svg { width: 18px; height: 18px; }
-
   .submit-btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: 16px; border-radius: 8px; font-size: 15px; font-weight: 500; cursor: pointer; margin-top: 8px; transition: all 0.3s; }
   .submit-btn:hover { background: var(--accent-hover); }
   .cancel-btn { width: 100%; background: transparent; color: var(--text-dim); border: none; padding: 14px; font-size: 14px; cursor: pointer; margin-top: 8px; }
-
   .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--dark-green); color: #fff; padding: 14px 28px; border-radius: 8px; font-weight: 500; font-size: 14px; opacity: 0; transition: all 0.3s; z-index: 400; pointer-events: none; box-shadow: var(--shadow-lg); text-align: center; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
   .loading-text { text-align: center; padding: 40px; color: var(--text-dim); font-size: 16px; grid-column: 1/-1; }
 
-  /* --- АДАПТИВНОСТЬ --- */
   @media (max-width: 900px) {
-    .product-modal { flex-direction: column; }
-    .pm-image-wrap { width: 100%; height: 300px; }
-    .pm-image { min-height: 300px; }
-    .pm-info { width: 100%; padding: 24px; }
-    .about-content { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-    .about-img { height: 400px; }
-    .nav-links { display: none; }
-    .hero h1 { font-size: 42px; }
+    .product-modal { flex-direction: column; } .pm-image-wrap { width: 100%; height: 300px; } .pm-image { min-height: 300px; } .pm-info { width: 100%; padding: 24px; }
+    .about-content { grid-template-columns: 1fr; gap: 40px; text-align: center; } .about-img { height: 400px; } .nav-links { display: none; } .hero h1 { font-size: 42px; }
   }
   @media (max-width: 600px) {
-    .hero-logo-img { max-width: 240px; }
-    .hero h1 { font-size: 32px; }
-    .hero p { font-size: 16px; }
-    .hero { padding: 60px 20px 60px; }
-    .btn-primary, .btn-secondary { width: 100%; text-align: center; }
-    .catalog-grid { grid-template-columns: 1fr; gap: 20px; }
-    .product-img-wrap { height: 280px; }
-    .section-title { font-size: 32px; }
-    .cart-panel { max-width: 100%; }
+    .hero-logo-img { max-width: 240px; } .hero h1 { font-size: 32px; } .hero p { font-size: 16px; } .hero { padding: 60px 20px 60px; }
+    .btn-primary, .btn-secondary { width: 100%; text-align: center; } .catalog-grid { grid-template-columns: 1fr; gap: 20px; } .product-img-wrap { height: 280px; }
+    .section-title { font-size: 32px; } .cart-panel { max-width: 100%; }
   }
 </style>
 </head>
@@ -449,21 +432,18 @@
 
 <script>
   // ==========================================
-  // НАСТРОЙКИ
+  // 1. НАСТРОЙКИ
   // ==========================================
   const LINK_VK = 'https://vk.com/valentina_pris';
   const LINK_TG = 'https://t.me/valentina_pris';
   const LINK_IG = 'https://instagram.com/valentina_pris';
   const LINK_MAX = 'https://max.ru/';
-
-  // Ссылка на таблицу (мгновенная через gviz)
   const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1_cgap3xdlFNLLxKsA28vnR4fjxsE-5_FBBfB6h-96xk/gviz/tq?tqx=out:csv&sheet=0';
 
   document.getElementById('linkVK').href = LINK_VK;
   document.getElementById('linkTG').href = LINK_TG;
   document.getElementById('linkIG').href = LINK_IG;
   document.getElementById('linkMAX').href = LINK_MAX;
-
   document.getElementById('modalLinkVK').href = LINK_VK;
   document.getElementById('modalLinkTG').href = LINK_TG;
   document.getElementById('modalLinkIG').href = LINK_IG;
@@ -473,49 +453,52 @@
   let cart = [];
 
   // ==========================================
-  // ЗАГРУЗКА И ОЧИСТКА ДАННЫХ
+  // 2. ЗАГРУЗКА И ОЧИСТКА ДАННЫХ
   // ==========================================
   function parseCSV(text) {
-    const result = [];
-    let row = [];
-    let current = '';
-    let inQuotes = false;
-
+    const result = []; let row = []; let current = ''; let inQuotes = false;
     for (let i = 0; i < text.length; i++) {
-      const char = text[i];
-      const nextChar = text[i + 1];
-
-      if (char === '"') {
-        if (inQuotes && nextChar === '"') { current += '"'; i++; }
-        else { inQuotes = !inQuotes; }
-      } else if (char === ',' && !inQuotes) {
-        row.push(current); current = '';
-      } else if ((char === '\n' || char === '\r') && !inQuotes) {
-        if (current !== '' || row.length > 0) {
-          row.push(current); result.push(row); row = []; current = '';
-        }
+      const char = text[i]; const nextChar = text[i + 1];
+      if (char === '"') { if (inQuotes && nextChar === '"') { current += '"'; i++; } else { inQuotes = !inQuotes; } }
+      else if (char === ',' && !inQuotes) { row.push(current); current = ''; }
+      else if ((char === '\n' || char === '\r') && !inQuotes) {
+        if (current !== '' || row.length > 0) { row.push(current); result.push(row); row = []; current = ''; }
         if (char === '\r' && nextChar === '\n') i++;
-      } else {
-        current += char;
-      }
+      } else { current += char; }
     }
     if (current !== '' || row.length > 0) { row.push(current); result.push(row); }
     return result;
   }
 
+  async function loadCatalog() {
+    const grid = document.getElementById('catalogGrid');
+    try {
+      const response = await fetch(SHEET_CSV_URL + '&t=' + Date.now());
+      if (!response.ok) throw new Error('Ошибка сети');
+      const text = await response.text();
+      if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) throw new Error('Неверная ссылка');
+
+      const rows = parseCSV(text);
+      if (rows.length < 2) throw new Error('Мало данных');
+
       products = rows.slice(1).map((cols, index) => {
         const name = cols[0] ? cols[0].trim() : '';
-        if (!name) return null; 
-        
+        if (!name) return null;
+
         let imgUrl = cols[2] ? cols[2].trim() : '';
 
-        // --- УМНАЯ ОБРАБОТКА GOOGLE ДИСКА ---
-        if (imgUrl && imgUrl.includes('drive.google.com')) {
-          // Ищем ID файла (набор букв и цифр между /d/ и /)
-          const match = imgUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
-          if (match && match[1]) {
-            // Превращаем в рабочую ссылку через thumbnail
-            imgUrl = `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
+        // --- УМНАЯ ОБРАБОТКА ССЫЛОК ---
+        if (imgUrl) {
+          imgUrl = imgUrl.replace(/[\n\r\t"']/g, '').trim(); // Убираем кавычки и пробелы
+
+          if (imgUrl.includes('drive.google.com')) {
+            const match = imgUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
+            if (match && match[1]) {
+              imgUrl = `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
+            }
+          } else {
+            const match = imgUrl.match(/https?:\/\/[^\s]+/);
+            if (match) imgUrl = match[0];
           }
         }
 
@@ -528,8 +511,15 @@
         };
       }).filter(p => p !== null);
 
+      renderCatalog();
+    } catch (error) {
+      console.error('Ошибка:', error);
+      grid.innerHTML = `<div class="loading-text" style="color:#b91c1c;">Не удалось загрузить каталог.<br><br><small>${error.message}</small></div>`;
+    }
+  }
+
   // ==========================================
-  // ОТРИСОВКА
+  // 3. ОТРИСОВКА
   // ==========================================
   function renderCatalog() {
     document.getElementById('catalogGrid').innerHTML = products.map(p => {
@@ -552,7 +542,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
           </button>
 
-          <div class="product-img-wrap"><img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Нет+фото'"></div>
+          <div class="product-img-wrap"><img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Ошибка+ссылки'"></div>
           <div class="product-info">
             <div class="product-title">${p.title}</div>
             <div class="product-price">${p.price.toLocaleString()} ₽</div>
@@ -595,7 +585,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
           </button>
 
-          <div class="product-img-wrap"><img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Нет+фото'"></div>
+          <div class="product-img-wrap"><img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Ошибка+ссылки'"></div>
           <div class="product-info">
             <div class="product-title">${p.title}</div>
             <div class="product-price">${p.price.toLocaleString()} ₽</div>
@@ -607,7 +597,7 @@
   }
 
   // ==========================================
-  // КАРТОЧКА ТОВАРА
+  // 4. КАРТОЧКА ТОВАРА
   // ==========================================
   function openProductModal(id) {
     const p = products.find(item => item.id === id);
@@ -638,7 +628,7 @@
   }
 
   // ==========================================
-  // КОРЗИНА
+  // 5. КОРЗИНА
   // ==========================================
   function addToCart(id) {
     const product = products.find(p => p.id === id);
@@ -699,7 +689,7 @@
   }
 
   // ==========================================
-  // ОФОРМЛЕНИЕ
+  // 6. ОФОРМЛЕНИЕ
   // ==========================================
   function openCheckout() {
     if (cart.length === 0) { showToast('Сначала добавьте товары'); return; }
