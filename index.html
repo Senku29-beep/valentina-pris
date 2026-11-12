@@ -71,7 +71,7 @@
 
   /* --- ОБЩИЕ СЕКЦИИ --- */
   section { padding: 100px 24px; position: relative; }
-  .container { max-width: 1200px; margin: 0 auto; }
+  .container { max-width: 1400px; margin: 0 auto; }
   .section-label { display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); margin-bottom: 16px; text-align: center; }
   .section-title { font-size: 42px; margin-bottom: 20px; text-align: center; line-height: 1.2; color: var(--dark-green); }
   .section-sub { text-align: center; color: var(--text-dim); font-size: 16px; margin-bottom: 60px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6; }
@@ -103,11 +103,7 @@
   .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-dim); pointer-events: none; }
 
   /* --- КАТАЛОГ --- */
-  .catalog-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-  }
+  .catalog-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
   .product-card { background: var(--surface-solid); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); transition: all 0.4s ease; display: flex; flex-direction: column; position: relative; border: 1px solid var(--border); cursor: pointer; }
   .product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--accent); }
   .product-img-wrap { overflow: hidden; height: 340px; position: relative; background: #f0ebe1; }
