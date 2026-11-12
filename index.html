@@ -515,7 +515,7 @@
     try {
       const response = await fetch(SHEET_CSV_URL + '&t=' + Date.now());
       if (!response.ok) throw new Error('Ошибка сети');
-      
+
       const text = await response.text();
       if (text.trim().startsWith('<!DOCTYPE') || text.trim().startsWith('<html')) {
         throw new Error('Неверная ссылка');
@@ -531,14 +531,16 @@
         // --- МАГИЯ ОЧИСТКИ ССЫЛКИ ---
         let imgUrl = cols[2] ? cols[2].trim() : '';
         
-        // Если Google превратил текст в ссылку (добавил кавычки или пробелы), убираем это
         if (imgUrl) {
-          // Ищем внутри текста ссылку, которая начинается на http
-          const match = imgUrl.match(/https?:\/\/[^\s"'<>]+/);
-          if (match) {
-            imgUrl = match[0]; // Берем только чистую ссылку
-          } else {
-            imgUrl = ''; // Если ссылки нет, ставим пустоту
+          // Очищаем от невидимых пробелов и переносов строк
+          imgUrl = imgUrl.replace(/[\n\r\t]/g, '').trim();
+          
+          // Если внутри текста есть ссылка на Google Диск, преобразуем её
+          if (imgUrl.includes('drive.google.com')) {
+            const gDriveId = imgUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
+            if (gDriveId && gDriveId[1]) {
+              imgUrl = `https://drive.google.com/uc?export=view&id=${gDriveId[1]}`;
+            }
           }
         }
 
