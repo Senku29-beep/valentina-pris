@@ -882,7 +882,7 @@
     }
     document.getElementById('cartItems').innerHTML = cart.map((item, index) => `
       <div class="cart-item">
-        <input type="checkbox" class="cart-item-checkbox" data-index="${index}" ${item.selected !== false ? 'checked' : ''} onchange="toggleCartItem(${index})">
+        <input type="checkbox" class="cart-item-checkbox" data-index="${index}" ${(item.selected !== false && item.selected !== undefined) ? 'checked' : ''} onchange="toggleCartItem(${index})">
         <img src="${item.images[0]}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/80'">
         <div class="cart-item-info">
           <div class="cart-item-title">${item.title}</div>
@@ -911,8 +911,10 @@
 
   // Функция подсчета суммы только выбранных товаров
   function calculateTotal() {
-    // Оставляем только те товары, у которых selected равно true
-    const selectedItems = cart.filter(item => item.selected === true);
+    // Если у товара нет статуса, считаем его выбранным по умолчанию
+    const selectedItems = cart.filter(item => item.selected !== false && item.selected !== undefined);
+
+    // Если вообще ничего не выбрано, но товары есть, покажем 0, но не будем ломать кнопку
     const total = selectedItems.reduce((s, i) => s + i.price * i.qty, 0);
     document.getElementById('cartTotal').textContent = total.toLocaleString() + ' ₽';
   }
@@ -936,7 +938,9 @@
   // 6. ОФОРМЛЕНИЕ
   // ==========================================
   function openCheckout() {
-    const selectedItems = cart.filter(item => item.selected !== false);
+    // Считаем выбранными все товары, у которых нет явного false
+    const selectedItems = cart.filter(item => item.selected !== false && item.selected !== undefined);
+
     if (selectedItems.length === 0) {
       showToast('Выберите хотя бы один товар');
       return;
