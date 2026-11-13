@@ -110,6 +110,10 @@
   .product-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
   .product-card:hover .product-img { transform: scale(1.05); }
 
+  /* Плашка Продано */
+  .sold-out-overlay { position: absolute; inset: 0; background: rgba(249, 246, 240, 0.6); display: flex; align-items: center; justify-content: center; backdrop-filter: blur(2px); z-index: 5; }
+  .sold-out-badge { background: var(--dark-green); color: #fff; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 16px; text-transform: uppercase; letter-spacing: 0.1em; transform: rotate(-10deg); box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 2px solid #fff; }
+
   .share-btn { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.9); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: 0.2s; z-index: 10; }
   .share-btn:hover { background: var(--dark-green); color: white; }
   .share-btn svg { width: 18px; height: 18px; color: var(--text-dim); }
@@ -131,7 +135,7 @@
 
   .add-btn { width: 100%; background: transparent; color: var(--dark-green); border: 1px solid var(--dark-green); padding: 12px; border-radius: 8px; font-weight: 500; font-size: 14px; cursor: pointer; transition: all 0.3s; }
   .add-btn:hover { background: var(--dark-green); color: #fff; }
-
+  
   .qty-controls { display: flex; align-items: center; justify-content: space-between; width: 100%; border: 1px solid var(--dark-green); border-radius: 8px; padding: 4px; }
   .qty-btn { background: transparent; border: none; color: var(--dark-green); font-size: 20px; cursor: pointer; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
   .qty-btn:hover { background: #f0ebe1; border-radius: 4px; }
@@ -547,19 +551,19 @@
     let row = [];
     let current = '';
     let inQuotes = false;
-    
+
     // Добавляем перевод строки в конец, чтобы последняя строка точно обработалась
-    text += '\n'; 
+    text += '\n';
 
     for (let i = 0; i < text.length; i++) {
       const char = text[i];
       const nextChar = text[i + 1];
-      
+
       if (char === '"') {
-        if (inQuotes && nextChar === '"') { 
-            current += '"'; i++; 
-        } else { 
-            inQuotes = !inQuotes; 
+        if (inQuotes && nextChar === '"') {
+            current += '"'; i++;
+        } else {
+            inQuotes = !inQuotes;
         }
       } else if (char === ',' && !inQuotes) {
         row.push(current.trim()); // Сразу убираем пробелы по краям
@@ -567,12 +571,12 @@
       } else if ((char === '\n' || char === '\r') && !inQuotes) {
         if (current !== '' || row.length > 0) {
           row.push(current.trim());
-          
+
           // Проверка: если строка не пустая (есть хотя бы название), добавляем её
           if (row.length > 0 && row[0] !== '') {
              result.push(row);
           }
-          row = []; 
+          row = [];
           current = '';
         }
         if (char === '\r' && nextChar === '\n') i++;
@@ -621,12 +625,16 @@
           });
         }
 
+        // Проверяем 5-й столбец (E). Если там "Да", "Yes", "1" или "True" — товар продан
+        const isSold = cols[4] ? ['да', 'yes', 'true', '1'].includes(cols[4].trim().toLowerCase()) : false;
+
         return {
           id: index,
           title: name,
           price: cols[1] ? Number(cols[1].replace(/[^\d]/g, '')) || 0 : 0,
           images: images.length > 0 ? images : ['https://via.placeholder.com/600x800/f0ebe1/6b665c?text=Нет+фото'],
-          desc: cols[3] ? cols[3].trim() : 'Описание скоро появится...'
+          desc: cols[3] ? cols[3].trim() : 'Описание скоро появится...',
+          sold: isSold // <--- Добавили это поле
         };
       }).filter(p => p !== null);
 
@@ -645,13 +653,21 @@
       const cartItem = cart.find(item => item.id === p.id);
       const qty = cartItem ? cartItem.qty : 0;
 
-      const actionHtml = qty > 0
-        ? `<div class="qty-controls">
+      let actionHtml = '';
+      let overlayHtml = '';
+
+      if (p.sold) {
+        actionHtml = `<button class="add-btn" style="background:#ccc; border-color:#ccc; color:#666; cursor:not-allowed;" disabled>Продано</button>`;
+        overlayHtml = `<div class="sold-out-overlay"><div class="sold-out-badge">Продано</div></div>`;
+      } else if (qty > 0) {
+        actionHtml = `<div class="qty-controls">
              <button class="qty-btn" onclick="event.stopPropagation(); decreaseQty(${p.id})">−</button>
              <span class="qty-value">${qty}</span>
              <button class="qty-btn" onclick="event.stopPropagation(); increaseQty(${p.id})">+</button>
-           </div>`
-        : `<button class="add-btn" onclick="event.stopPropagation(); addToCart(${p.id})">В корзину</button>`;
+           </div>`;
+      } else {
+        actionHtml = `<button class="add-btn" onclick="event.stopPropagation(); addToCart(${p.id})">В корзину</button>`;
+      }
 
       const imgUrl = p.images[0];
 
@@ -661,7 +677,10 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
           </button>
 
-          <div class="product-img-wrap"><img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Ошибка'"></div>
+          <div class="product-img-wrap">
+            <img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Ошибка'">
+            ${overlayHtml}
+          </div>
           <div class="product-info">
             <div class="product-title">${p.title}</div>
             <div class="product-price">${p.price.toLocaleString()} ₽</div>
@@ -688,13 +707,22 @@
     grid.innerHTML = filtered.map((p, index) => {
       const cartItem = cart.find(item => item.id === p.id);
       const qty = cartItem ? cartItem.qty : 0;
-      const actionHtml = qty > 0
-        ? `<div class="qty-controls">
+
+      let actionHtml = '';
+      let overlayHtml = '';
+
+      if (p.sold) {
+        actionHtml = `<button class="add-btn" style="background:#ccc; border-color:#ccc; color:#666; cursor:not-allowed;" disabled>Продано</button>`;
+        overlayHtml = `<div class="sold-out-overlay"><div class="sold-out-badge">Продано</div></div>`;
+      } else if (qty > 0) {
+        actionHtml = `<div class="qty-controls">
              <button class="qty-btn" onclick="event.stopPropagation(); decreaseQty(${p.id})">−</button>
              <span class="qty-value">${qty}</span>
              <button class="qty-btn" onclick="event.stopPropagation(); increaseQty(${p.id})">+</button>
-           </div>`
-        : `<button class="add-btn" onclick="event.stopPropagation(); addToCart(${p.id})">В корзину</button>`;
+           </div>`;
+      } else {
+        actionHtml = `<button class="add-btn" onclick="event.stopPropagation(); addToCart(${p.id})">В корзину</button>`;
+      }
 
       const imgUrl = p.images[0];
 
@@ -704,7 +732,10 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
           </button>
 
-          <div class="product-img-wrap"><img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Ошибка'"></div>
+          <div class="product-img-wrap">
+            <img src="${imgUrl}" class="product-img" alt="${p.title}" onerror="this.src='https://via.placeholder.com/300x340/f0ebe1/6b665c?text=Ошибка'">
+            ${overlayHtml}
+          </div>
           <div class="product-info">
             <div class="product-title">${p.title}</div>
             <div class="product-price">${p.price.toLocaleString()} ₽</div>
@@ -755,15 +786,21 @@
       thumbContainer.style.display = 'none'; // Скрываем, если фото одно
     }
 
-    // Кнопка добавления в корзину
+    // Кнопка добавления в корзину или плашка Продано
     const qty = cart.find(item => item.id === p.id)?.qty || 0;
-    const actionHtml = qty > 0
-        ? `<div class="qty-controls">
+    let actionHtml = '';
+
+    if (p.sold) {
+      actionHtml = `<button class="pm-add-btn" style="background:#ccc; color:#666; cursor:not-allowed;" disabled>Товар продан</button>`;
+    } else if (qty > 0) {
+      actionHtml = `<div class="qty-controls">
              <button class="qty-btn" onclick="decreaseQty(${p.id}); updateModalQty(${p.id})">−</button>
              <span class="qty-value">${qty}</span>
              <button class="qty-btn" onclick="increaseQty(${p.id}); updateModalQty(${p.id})">+</button>
-           </div>`
-        : `<button class="pm-add-btn" onclick="addToCart(${p.id}); updateModalQty(${p.id})">Добавить в корзину</button>`;
+           </div>`;
+    } else {
+      actionHtml = `<button class="pm-add-btn" onclick="addToCart(${p.id}); updateModalQty(${p.id})">Добавить в корзину</button>`;
+    }
 
     document.getElementById('pmActions').innerHTML = actionHtml;
     document.getElementById('productModalOverlay').classList.add('active');
@@ -773,15 +810,22 @@
   // Обновляем только блок кнопки в модалке, чтобы не сбрасывать галерею
   function updateModalQty(id) {
     const p = products.find(item => item.id === id);
+    if (!p) return;
+    
     const qty = cart.find(item => item.id === id)?.qty || 0;
+    let actionHtml = '';
 
-    const actionHtml = qty > 0
-        ? `<div class="qty-controls">
+    if (p.sold) {
+      actionHtml = `<button class="pm-add-btn" style="background:#ccc; color:#666; cursor:not-allowed;" disabled>Товар продан</button>`;
+    } else if (qty > 0) {
+      actionHtml = `<div class="qty-controls">
              <button class="qty-btn" onclick="decreaseQty(${p.id}); updateModalQty(${p.id})">−</button>
              <span class="qty-value">${qty}</span>
              <button class="qty-btn" onclick="increaseQty(${p.id}); updateModalQty(${p.id})">+</button>
-           </div>`
-        : `<button class="pm-add-btn" onclick="addToCart(${p.id}); updateModalQty(${p.id})">Добавить в корзину</button>`;
+           </div>`;
+    } else {
+      actionHtml = `<button class="pm-add-btn" onclick="addToCart(${p.id}); updateModalQty(${p.id})">Добавить в корзину</button>`;
+    }
 
     document.getElementById('pmActions').innerHTML = actionHtml;
     renderCatalog();
@@ -798,9 +842,11 @@
   // ==========================================
   function addToCart(id) {
     const product = products.find(p => p.id === id);
+    if (product.sold) return; // Защита от добавления проданного
+
     const existing = cart.find(item => item.id === id);
     if (existing) existing.qty++;
-    else cart.push({ ...product, qty: 1, selected: true }); // <--- ДОБАВИЛИ selected: true
+    else cart.push({ ...product, qty: 1, selected: true });
     renderCatalog(); updateCart();
     saveCart();
     showToast(`Добавлено: ${product.title}`);
@@ -825,7 +871,7 @@
       updateCart();
       saveCart(); // Сохраняем изменения
     }
-  } // <--- ЗДЕСЬ БЫЛА ПРОПУЩЕНА СКОБКА
+  }
 
   function updateCart() {
     document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
