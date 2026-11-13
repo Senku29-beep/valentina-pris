@@ -217,6 +217,10 @@
   .cart-item { display: flex; gap: 16px; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
   .cart-item img { width: 70px; height: 70px; border-radius: 8px; object-fit: cover; }
   .cart-item-info { flex: 1; }
+  .cart-qty-controls { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+  .cart-qty-btn { background: transparent; border: 1px solid var(--dark-green); color: var(--dark-green); width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; transition: 0.2s; }
+  .cart-qty-btn:hover { background: var(--dark-green); color: #fff; }
+  .cart-qty-value { font-size: 14px; font-weight: 600; color: var(--dark-green); min-width: 20px; text-align: center; }
   .cart-item-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; color: var(--dark-green); }
   .cart-item-price { font-size: 14px; color: var(--accent); font-weight: 500; }
   .cart-item-remove { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 18px; }
@@ -778,20 +782,24 @@
 
   function increaseQty(id) {
     const item = cart.find(i => i.id === id);
-    if (item) { item.qty++; renderCatalog(); updateCart(); }
-    saveCart();
+    if (item) {
+      item.qty++;
+      renderCatalog();
+      updateCart();
+      saveCart(); // Сохраняем изменения
+    }
   }
 
   function decreaseQty(id) {
     const index = cart.findIndex(i => i.id === id);
     if (index !== -1) {
       cart[index].qty--;
-      if (cart[index].qty <= 0) cart.splice(index, 1);
-      renderCatalog(); updateCart();
-      saveCart();
+      if (cart[index].qty <= 0) cart.splice(index, 1); // Если 0, удаляем
+      renderCatalog();
+      updateCart();
+      saveCart(); // Сохраняем изменения
     }
-  }
-
+  
   function updateCart() {
     document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
     if (cart.length === 0) {
@@ -801,38 +809,24 @@
     }
     document.getElementById('cartItems').innerHTML = cart.map((item, index) => `
       <div class="cart-item">
+        <input type="checkbox" class="cart-item-checkbox" data-index="${index}" ${item.selected !== false ? 'checked' : ''} onchange="toggleCartItem(${index})">
         <img src="${item.images[0]}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/80'">
         <div class="cart-item-info">
           <div class="cart-item-title">${item.title}</div>
-          <div class="cart-item-price">${(item.price * item.qty).toLocaleString()} ₽ <span style="font-size:13px; color:var(--text-dim); font-weight:400;">(${item.qty} шт.)</span></div>
+          <div class="cart-item-price">${(item.price * item.qty).toLocaleString()} ₽</div>
+
+          <!-- НОВЫЙ БЛОК С КНОПКАМИ - 1 + -->
+          <div class="cart-qty-controls">
+            <button class="cart-qty-btn" onclick="decreaseQty(${item.id})">−</button>
+            <span class="cart-qty-value">${item.qty}</span>
+            <button class="cart-qty-btn" onclick="increaseQty(${item.id})">+</button>
+          </div>
+
         </div>
         <button class="cart-item-remove" onclick="removeFromCart(${index})">✕</button>
       </div>
     `).join('');
     document.getElementById('cartTotal').textContent = cart.reduce((s, i) => s + i.price * i.qty, 0).toLocaleString() + ' ₽';
-  }  function updateCart() {
-    document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
-
-    if (cart.length === 0) {
-      document.getElementById('cartItems').innerHTML = '<div style="text-align:center; color:var(--text-dim); margin-top:60px;"><div style="font-size:40px; margin-bottom:16px; opacity:0.5;">🛍</div><p style="font-size:15px; font-weight:500;">Корзина пока пуста</p></div>';
-      document.getElementById('cartTotal').textContent = '0 ₽';
-      return;
-    }
-
-    // Отрисовываем товары с галочками
-    document.getElementById('cartItems').innerHTML = cart.map((item, index) => `
-      <div class="cart-item">
-        <input type="checkbox" class="cart-item-checkbox" data-index="${index}" ${item.selected !== false ? 'checked' : ''} onchange="toggleCartItem(${index})">
-        <img src="${item.images[0]}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/80'">
-        <div class="cart-item-info">
-          <div class="cart-item-title">${item.title}</div>
-          <div class="cart-item-price">${(item.price * item.qty).toLocaleString()} ₽ <span style="font-size:13px; color:var(--text-dim); font-weight:400;">(${item.qty} шт.)</span></div>
-        </div>
-        <button class="cart-item-remove" onclick="removeFromCart(${index})">✕</button>
-      </div>
-    `).join('');
-
-    calculateTotal();
   }
 
   // Функция переключения галочки
