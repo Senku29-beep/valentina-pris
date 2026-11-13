@@ -970,6 +970,8 @@
     navigator.clipboard.writeText(message).then(() => {
       cart = [];
       saveCart(); // Очищаем память
+      renderCatalog(); // Обновляем счетчики на карточках в каталоге
+      updateCart();    // Очищаем визуальный список в корзине
       closeProductModal();
       document.getElementById('modalStep1').style.display = 'none';
       document.getElementById('modalStep2').style.display = 'block';
