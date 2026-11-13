@@ -154,7 +154,7 @@
     height: 100%;
     object-fit: contain;
     background: #f0ebe1;
-    animation: fadeIn 0.4s ease-out; /* <--- ДОБАВЬ ЭТУ СТРОКУ */
+    animation: fadeIn 0.4s ease-out;
   }
   @keyframes fadeIn {
     from { opacity: 0; }
@@ -799,7 +799,8 @@
       updateCart();
       saveCart(); // Сохраняем изменения
     }
-  
+  } // <--- ЗДЕСЬ БЫЛА ПРОПУЩЕНА СКОБКА
+
   function updateCart() {
     document.getElementById('cartCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
     if (cart.length === 0) {
@@ -826,7 +827,7 @@
         <button class="cart-item-remove" onclick="removeFromCart(${index})">✕</button>
       </div>
     `).join('');
-    document.getElementById('cartTotal').textContent = cart.reduce((s, i) => s + i.price * i.qty, 0).toLocaleString() + ' ₽';
+    calculateTotal(); // <--- ДОБАВИЛИ ПЕРЕСЧЕТ СУММЫ
   }
 
   // Функция переключения галочки
@@ -843,6 +844,7 @@
     const total = selectedItems.reduce((s, i) => s + i.price * i.qty, 0);
     document.getElementById('cartTotal').textContent = total.toLocaleString() + ' ₽';
   }
+  
   function removeFromCart(index) { cart.splice(index, 1); renderCatalog(); updateCart(); saveCart();}
   function toggleCart() { document.getElementById('cartPanel').classList.toggle('active'); document.getElementById('cartOverlay').classList.toggle('active'); }
 
