@@ -770,7 +770,7 @@
     const product = products.find(p => p.id === id);
     const existing = cart.find(item => item.id === id);
     if (existing) existing.qty++;
-    else cart.push({ ...product, qty: 1 });
+    else cart.push({ ...product, qty: 1, selected: true }); // <--- ДОБАВИЛИ selected: true
     renderCatalog(); updateCart();
     saveCart();
     showToast(`Добавлено: ${product.title}`);
@@ -839,12 +839,13 @@
   function toggleCartItem(index) {
     cart[index].selected = !cart[index].selected;
     saveCart();
-    calculateTotal();
+    calculateTotal(); // <--- Вызываем пересчет
   }
 
   // Функция подсчета суммы только выбранных товаров
   function calculateTotal() {
-    const selectedItems = cart.filter(item => item.selected !== false);
+    // Оставляем только те товары, у которых selected равно true
+    const selectedItems = cart.filter(item => item.selected === true);
     const total = selectedItems.reduce((s, i) => s + i.price * i.qty, 0);
     document.getElementById('cartTotal').textContent = total.toLocaleString() + ' ₽';
   }
@@ -899,7 +900,7 @@
     message += `\n💰 Итого: ${total.toLocaleString()} ₽`;
 
     navigator.clipboard.writeText(message).then(() => {
-      cart = []; 
+      cart = [];
       saveCart(); // Очищаем память
       closeProductModal();
       document.getElementById('modalStep1').style.display = 'none';
