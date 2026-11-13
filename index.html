@@ -542,18 +542,44 @@
   // ==========================================
   // 2. ЗАГРУЗКА И ОЧИСТКА ДАННЫХ
   // ==========================================
-  function parseCSV(text) {
-    const result = []; let row = []; let current = ''; let inQuotes = false;
+   function parseCSV(text) {
+    const result = [];
+    let row = [];
+    let current = '';
+    let inQuotes = false;
+    
+    // Добавляем перевод строки в конец, чтобы последняя строка точно обработалась
+    text += '\n'; 
+
     for (let i = 0; i < text.length; i++) {
-      const char = text[i]; const nextChar = text[i + 1];
-      if (char === '"') { if (inQuotes && nextChar === '"') { current += '"'; i++; } else { inQuotes = !inQuotes; } }
-      else if (char === ',' && !inQuotes) { row.push(current); current = ''; }
-      else if ((char === '\n' || char === '\r') && !inQuotes) {
-        if (current !== '' || row.length > 0) { row.push(current); result.push(row); row = []; current = ''; }
+      const char = text[i];
+      const nextChar = text[i + 1];
+      
+      if (char === '"') {
+        if (inQuotes && nextChar === '"') { 
+            current += '"'; i++; 
+        } else { 
+            inQuotes = !inQuotes; 
+        }
+      } else if (char === ',' && !inQuotes) {
+        row.push(current.trim()); // Сразу убираем пробелы по краям
+        current = '';
+      } else if ((char === '\n' || char === '\r') && !inQuotes) {
+        if (current !== '' || row.length > 0) {
+          row.push(current.trim());
+          
+          // Проверка: если строка не пустая (есть хотя бы название), добавляем её
+          if (row.length > 0 && row[0] !== '') {
+             result.push(row);
+          }
+          row = []; 
+          current = '';
+        }
         if (char === '\r' && nextChar === '\n') i++;
-      } else { current += char; }
+      } else {
+        current += char;
+      }
     }
-    if (current !== '' || row.length > 0) { row.push(current); result.push(row); }
     return result;
   }
 
@@ -933,7 +959,7 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   }
-  
+
   updateCart();
   loadCatalog();
   initScrollAnimations();
