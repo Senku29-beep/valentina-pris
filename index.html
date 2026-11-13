@@ -135,7 +135,7 @@
 
   .add-btn { width: 100%; background: transparent; color: var(--dark-green); border: 1px solid var(--dark-green); padding: 12px; border-radius: 8px; font-weight: 500; font-size: 14px; cursor: pointer; transition: all 0.3s; }
   .add-btn:hover { background: var(--dark-green); color: #fff; }
-  
+
   .qty-controls { display: flex; align-items: center; justify-content: space-between; width: 100%; border: 1px solid var(--dark-green); border-radius: 8px; padding: 4px; }
   .qty-btn { background: transparent; border: none; color: var(--dark-green); font-size: 20px; cursor: pointer; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; }
   .qty-btn:hover { background: #f0ebe1; border-radius: 4px; }
@@ -546,7 +546,7 @@
   // ==========================================
   // 2. ЗАГРУЗКА И ОЧИСТКА ДАННЫХ
   // ==========================================
-   function parseCSV(text) {
+  function parseCSV(text) {
     const result = [];
     let row = [];
     let current = '';
@@ -566,14 +566,14 @@
             inQuotes = !inQuotes;
         }
       } else if (char === ',' && !inQuotes) {
-        row.push(current.trim()); // Сразу убираем пробелы по краям
+        row.push(current.trim());
         current = '';
       } else if ((char === '\n' || char === '\r') && !inQuotes) {
         if (current !== '' || row.length > 0) {
           row.push(current.trim());
 
-          // Проверка: если строка не пустая (есть хотя бы название), добавляем её
-          if (row.length > 0 && row[0] !== '') {
+          // Если в строке есть хоть какие-то данные, сохраняем её
+          if (row.length > 0 && row.some(cell => cell !== '')) {
              result.push(row);
           }
           row = [];
@@ -811,7 +811,7 @@
   function updateModalQty(id) {
     const p = products.find(item => item.id === id);
     if (!p) return;
-    
+
     const qty = cart.find(item => item.id === id)?.qty || 0;
     let actionHtml = '';
 
