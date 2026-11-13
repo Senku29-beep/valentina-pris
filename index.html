@@ -844,7 +844,7 @@
     const total = selectedItems.reduce((s, i) => s + i.price * i.qty, 0);
     document.getElementById('cartTotal').textContent = total.toLocaleString() + ' ₽';
   }
-  
+
   function removeFromCart(index) { cart.splice(index, 1); renderCatalog(); updateCart(); saveCart();}
   function toggleCart() { document.getElementById('cartPanel').classList.toggle('active'); document.getElementById('cartOverlay').classList.toggle('active'); }
 
@@ -933,7 +933,8 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   }
-
+  
+  updateCart();
   loadCatalog();
   initScrollAnimations();
 </script>
