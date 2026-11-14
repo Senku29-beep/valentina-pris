@@ -294,6 +294,13 @@
     opacity: 0; /* Изначально скрыты */
     animation: fadeUpCard 0.6s ease-out forwards;
   }
+  .product-stone {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+    font-weight: 500;
+    display: inline-block;
+  }
 </style>
 </head>
 <body>
@@ -461,6 +468,7 @@
     <div class="pm-info">
       <h2 class="pm-title" id="pmTitle"></h2>
       <div class="pm-price" id="pmPrice"></div>
+      <div class="pm-stone" id="pmStone" style="font-size: 14px; color: var(--text-dim); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500;"></div>
 
       <!-- Блок с описанием и прокруткой -->
       <div class="pm-desc-wrapper">
@@ -628,13 +636,17 @@
         // Проверяем 5-й столбец (E). Если там "Да", "Yes", "1" или "True" — товар продан
         const isSold = cols[4] ? ['да', 'yes', 'true', '1'].includes(cols[4].trim().toLowerCase()) : false;
 
+        // Читаем 6-й столбец (F) - Камень
+        const stone = cols[5] ? cols[5].trim() : '';
+
         return {
           id: index,
           title: name,
           price: cols[1] ? Number(cols[1].replace(/[^\d]/g, '')) || 0 : 0,
           images: images.length > 0 ? images : ['https://via.placeholder.com/600x800/f0ebe1/6b665c?text=Нет+фото'],
           desc: cols[3] ? cols[3].trim() : 'Описание скоро появится...',
-          sold: isSold // <--- Добавили это поле
+          sold: isSold, // <--- Добавили это поле
+          stone: stone  // <--- ДОБАВИЛИ КАМЕНЬ
         };
       }).filter(p => p !== null);
 
@@ -683,6 +695,7 @@
           </div>
           <div class="product-info">
             <div class="product-title">${p.title}</div>
+            ${p.stone ? `<div class="product-stone">💎 ${p.stone}</div>` : ''}
             <div class="product-price">${p.price.toLocaleString()} ₽</div>
             <div class="product-action">${actionHtml}</div>
           </div>
@@ -755,6 +768,7 @@
 
     document.getElementById('pmTitle').textContent = p.title;
     document.getElementById('pmPrice').textContent = p.price.toLocaleString() + ' ₽';
+    document.getElementById('pmStone').textContent = p.stone ? `Камень: ${p.stone}` : '';
     document.getElementById('pmDesc').textContent = p.desc;
 
     // Устанавливаем первое фото как главное
