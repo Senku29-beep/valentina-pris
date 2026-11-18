@@ -413,6 +413,7 @@
 
 <!-- ОТЗЫВЫ -->
 <section id="reviews">
+  <div class="container">
     <div class="section-label">Отзывы</div>
     <h2 class="section-title">Слова благодарности</h2>
     <p class="section-sub">Что говорят те, кто уже носит мои украшения</p>
@@ -422,45 +423,52 @@
       <button class="slider-btn next" onclick="scrollReviews(1)">›</button>
 
       <div class="reviews-grid" id="reviewsSlider">
-
+        
+        <!-- Отзыв 1 -->
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
           <div class="review-text">«Валентина, как я довольна камнями. Они меня так чувствуют и настраивают. Спасибо большое, что делаешь их с максимальным заземлением. Близость к земле и природе делает свое дело. Они очень сонастроены на новую энергию. Ты мастер, и делаешь это мастерски!»</div>
-          <div class="review-author"><div class="review-avatar" style="background:#5D3313;">О</div><div><div class="review-name">Олеся</div><div class="review-city">Телеграм</div></div></div>
+          <div class="review-author"><div class="review-avatar" style="background:#5D3313;">О</div><div><div class="review-name">Олеся</div></div></div>
         </div>
 
+        <!-- Отзыв 2 -->
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
           <div class="review-text">«Украшения от Валентины — это не только стиль, но и грамотно подобранные камни с учётом твоих запросов. Валечка всегда что-то порекомендует, если к ней обратиться с проблемой: какой камушек в этом случае поможет. И ведь помогает. Не знаю, как она это делает, но она мой ангел-хранитель»</div>
-          <div class="review-author"><div class="review-avatar" style="background:#7c3aed;">А</div><div><div class="review-name">Алексей</div><div class="review-city">ВКонтакте</div></div></div>
+          <div class="review-author"><div class="review-avatar" style="background:#7c3aed;">А</div><div><div class="review-name">Алексей</div></div></div>
         </div>
 
+        <!-- Отзыв 3 -->
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
           <div class="review-text">«Заказала себе набор из лавового камня в очень сложный период своей жизни. Сейчас мне кажется, что без этого набора я бы и не справилась. Я физически ощутила на себе действие камней... Целый месяц строго следовала всем указаниям и получала очень своевременную поддержку. Обязательно буду повторять эту чистку ежегодно!»</div>
-          <div class="review-author"><div class="review-avatar" style="background:#047857;">Е</div><div><div class="review-name">Екатерина</div><div class="review-city">ВКонтакте</div></div></div>
+          <div class="review-author"><div class="review-avatar" style="background:#047857;">Е</div><div><div class="review-name">Екатерина</div></div></div>
         </div>
 
+        <!-- Отзыв 4 -->
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
           <div class="review-text">«Это восторг, ещё раз все перечитала, стооолько информации. Мысли от прочитанного «да это я... это все про меня... какая же я хорошая». Ох хочется все камни на себя надеть, но раз ты говоришь нужно выбирать... то Нефрит, цитрин и Амазонит. Но и змеевик понравился по описанию.»</div>
-          <div class="review-author"><div class="review-avatar" style="background:#db2777;">Ю</div><div><div class="review-name">Юлия</div><div class="review-city">Телеграм</div></div></div>
+          <div class="review-author"><div class="review-avatar" style="background:#db2777;">Ю</div><div><div class="review-name">Юлия</div></div></div>
         </div>
 
+        <!-- Отзыв 5 -->
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
           <div class="review-text">«Влюблена в эти украшения всем телом и Душой! На фото лишь малая часть моей коллекции от тебя, милая моя. Всегда в точку попадаешь и делаешь украшения, которые не только красивые, а ещё и исцеляющие, помогающие и вдохновляющие. Благодарю судьбу за то, что ты есть в моей жизни!»</div>
-          <div class="review-author"><div class="review-avatar" style="background:#ea580c;">Е</div><div><div class="review-name">Екатерина Г.</div><div class="review-city">ВКонтакте</div></div></div>
+          <div class="review-author"><div class="review-avatar" style="background:#ea580c;">Е</div><div><div class="review-name">Екатерина Г.</div></div></div>
         </div>
 
+        <!-- Отзыв 6 -->
         <div class="review-card">
           <div class="review-stars">★★★★★</div>
           <div class="review-text">«Валюша, спасибо вам большое за вашу работу, знания, тёплое отношение. Украшения ваши изумительной красоты, неповторимые и лучезарные. Ношу их с удовольствием и всегда с хорошим настроением! Спасибо за ваши переделки, они радуют и вдохновляют!»</div>
-          <div class="review-author"><div class="review-avatar" style="background:#c026d3;">М</div><div><div class="review-name">Марина</div><div class="review-city">Телеграм</div></div></div>
+          <div class="review-author"><div class="review-avatar" style="background:#c026d3;">М</div><div><div class="review-name">Марина</div></div></div>
         </div>
 
       </div>
     </div>
+  </div>
 </section>
 
 <!-- КОНТАКТЫ -->
@@ -1098,7 +1106,7 @@
     const cardWidth = slider.querySelector('.review-card').offsetWidth + 24;
     slider.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
   }
-  
+
   updateCart();
   loadCatalog();
   initScrollAnimations();
