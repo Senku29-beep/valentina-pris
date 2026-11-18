@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Валентина Присяжнюк | Браслеты из натуральных камней и гармонизаторы</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23F9F6F0'/%3E%3Cpolygon points='50,15 85,40 70,85 30,85 15,40' fill='%23454021'/%3E%3Cpolygon points='50,15 85,40 50,50 15,40' fill='%23925E29'/%3E%3Cpolygon points='50,50 85,40 70,85' fill='%236b665c'/%3E%3Cpolygon points='50,50 15,40 30,85' fill='%23201D12'/%3E%3C/svg%3E">
+<title>Валентина Присяжнюк | Браслеты из натуральных камней и гармонизаторы</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23F9F6F0'/%3E%3Cpolygon points='50,15 85,40 70,85 30,85 15,40' fill='%23454021'/%3E%3Cpolygon points='50,15 85,40 50,50 15,40' fill='%23925E29'/%3E%3Cpolygon points='50,50 85,40 70,85' fill='%236b665c'/%3E%3Cpolygon points='50,50 15,40 30,85' fill='%23201D12'/%3E%3C/svg%3E">
 <meta name="description" content="Авторские украшения из натуральных камней от практикующего литотерапевта Валентины Присяжнюк. Индивидуальный подбор для гармонии, защиты и удачи. Доставка по России.">
 <meta name="keywords" content="литотерапия, браслеты из камней, купить украшения ручной работы, гармонизаторы, камни для удачи, Валентина Присяжнюк">
 
@@ -186,8 +185,46 @@
   .pm-add-btn:hover { background: var(--accent); }
 
   /* --- ОТЗЫВЫ --- */
-  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
-  .review-card { background: var(--surface-solid); border-radius: var(--radius); padding: 32px; border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+    /* --- ОТЗЫВЫ (КАРУСЕЛЬ) --- */
+  .reviews-slider-wrapper { position: relative; max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  .reviews-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 24px;
+    padding-bottom: 20px;
+    scrollbar-width: none;
+  }
+  .reviews-grid::-webkit-scrollbar { display: none; }
+
+  .review-card {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    background: var(--surface-solid);
+    border-radius: var(--radius);
+    padding: 32px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .review-text { font-size: 16px; line-height: 1.8; margin-bottom: 24px; font-style: italic; color: var(--text-dim); flex: 1; }
+
+  .slider-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--surface-solid); border: 1px solid var(--border);
+    color: var(--dark-green); font-size: 24px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--shadow-lg); transition: 0.2s; z-index: 10;
+  }
+  .slider-btn:hover { background: var(--dark-green); color: #fff; }
+  .slider-btn.prev { left: 0; }
+  .slider-btn.next { right: 0; }
+
+  @media (min-width: 600px) { .review-card { flex: 0 0 calc(50% - 12px); } }
+  @media (min-width: 900px) { .review-card { flex: 0 0 calc(33.333% - 16px); } }
   .review-stars { color: var(--accent); font-size: 16px; margin-bottom: 16px; letter-spacing: 2px; }
   .review-text { font-size: 15px; line-height: 1.7; margin-bottom: 24px; font-style: italic; color: var(--text-dim); }
   .review-author { display: flex; align-items: center; gap: 12px; }
@@ -376,29 +413,54 @@
 
 <!-- ОТЗЫВЫ -->
 <section id="reviews">
-  <div class="container">
     <div class="section-label">Отзывы</div>
     <h2 class="section-title">Слова благодарности</h2>
     <p class="section-sub">Что говорят те, кто уже носит мои украшения</p>
 
-    <div class="reviews-grid">
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">«Заказывал браслет на подарок жене. Валентина помогла подобрать идеальный камень. Жена в восторге, носит не снимая!»</div>
-        <div class="review-author"><div class="review-avatar">А</div><div><div class="review-name">Алексей</div><div class="review-city">Москва</div></div></div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">«Очень нежные и красивые украшения. Чувствуется ручная работа и особая энергетика. Браслет подошёл идеально!»</div>
-        <div class="review-author"><div class="review-avatar" style="background:#925E29;">Е</div><div><div class="review-name">Екатерина</div><div class="review-city">СПб</div></div></div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">«Покупала колье для себя. Очень долго выбирала, но Валентина помогла определиться. Качество на высоте, упаковка шикарная.»</div>
-        <div class="review-author"><div class="review-avatar" style="background:#5D3313;">М</div><div><div class="review-name">Мария</div><div class="review-city">Казань</div></div></div>
+    <div class="reviews-slider-wrapper">
+      <button class="slider-btn prev" onclick="scrollReviews(-1)">‹</button>
+      <button class="slider-btn next" onclick="scrollReviews(1)">›</button>
+
+      <div class="reviews-grid" id="reviewsSlider">
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">«Валентина, как я довольна камнями. Они меня так чувствуют и настраивают. Спасибо большое, что делаешь их с максимальным заземлением. Близость к земле и природе делает свое дело. Они очень сонастроены на новую энергию. Ты мастер, и делаешь это мастерски!»</div>
+          <div class="review-author"><div class="review-avatar" style="background:#5D3313;">О</div><div><div class="review-name">Олеся</div><div class="review-city">Телеграм</div></div></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">«Украшения от Валентины — это не только стиль, но и грамотно подобранные камни с учётом твоих запросов. Валечка всегда что-то порекомендует, если к ней обратиться с проблемой: какой камушек в этом случае поможет. И ведь помогает. Не знаю, как она это делает, но она мой ангел-хранитель»</div>
+          <div class="review-author"><div class="review-avatar" style="background:#7c3aed;">А</div><div><div class="review-name">Алексей</div><div class="review-city">ВКонтакте</div></div></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">«Заказала себе набор из лавового камня в очень сложный период своей жизни. Сейчас мне кажется, что без этого набора я бы и не справилась. Я физически ощутила на себе действие камней... Целый месяц строго следовала всем указаниям и получала очень своевременную поддержку. Обязательно буду повторять эту чистку ежегодно!»</div>
+          <div class="review-author"><div class="review-avatar" style="background:#047857;">Е</div><div><div class="review-name">Екатерина</div><div class="review-city">ВКонтакте</div></div></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">«Это восторг, ещё раз все перечитала, стооолько информации. Мысли от прочитанного «да это я... это все про меня... какая же я хорошая». Ох хочется все камни на себя надеть, но раз ты говоришь нужно выбирать... то Нефрит, цитрин и Амазонит. Но и змеевик понравился по описанию.»</div>
+          <div class="review-author"><div class="review-avatar" style="background:#db2777;">Ю</div><div><div class="review-name">Юлия</div><div class="review-city">Телеграм</div></div></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">«Влюблена в эти украшения всем телом и Душой! На фото лишь малая часть моей коллекции от тебя, милая моя. Всегда в точку попадаешь и делаешь украшения, которые не только красивые, а ещё и исцеляющие, помогающие и вдохновляющие. Благодарю судьбу за то, что ты есть в моей жизни!»</div>
+          <div class="review-author"><div class="review-avatar" style="background:#ea580c;">Е</div><div><div class="review-name">Екатерина Г.</div><div class="review-city">ВКонтакте</div></div></div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <div class="review-text">«Валюша, спасибо вам большое за вашу работу, знания, тёплое отношение. Украшения ваши изумительной красоты, неповторимые и лучезарные. Ношу их с удовольствием и всегда с хорошим настроением! Спасибо за ваши переделки, они радуют и вдохновляют!»</div>
+          <div class="review-author"><div class="review-avatar" style="background:#c026d3;">М</div><div><div class="review-name">Марина</div><div class="review-city">Телеграм</div></div></div>
+        </div>
+
       </div>
     </div>
-  </div>
 </section>
 
 <!-- КОНТАКТЫ -->
@@ -535,7 +597,7 @@
   const LINK_TG = atob('aHR0cHM6Ly90Lm1lL1ZhbGVudGluYV9Qcmlz');
   const LINK_IG = atob('aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS92YWxlbnRpbmFfX3ByaXM/aWdzaD1aV016ZG00MFpXbHJlREV6');
     // Ссылка на профиль Валентины в MAX (с принудительным открытием приложения)
-  const LINK_MAX = 'https://max.ru/u/f9LHodD0cOLVPmgCVgj7hh6X0WmDdlosHdpY9B4V5UgR-J-0cCxZ0T-X3Wo'; 
+  const LINK_MAX = 'https://max.ru/u/f9LHodD0cOLVPmgCVgj7hh6X0WmDdlosHdpY9B4V5UgR-J-0cCxZ0T-X3Wo';
   const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1_cgap3xdlFNLLxKsA28vnR4fjxsE-5_FBBfB6h-96xk/gviz/tq?tqx=out:csv&sheet=0';
 
   document.getElementById('linkVK').href = LINK_VK;
@@ -1029,7 +1091,14 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   }
-
+  
+    // Листание отзывов
+  function scrollReviews(direction) {
+    const slider = document.getElementById('reviewsSlider');
+    const cardWidth = slider.querySelector('.review-card').offsetWidth + 24;
+    slider.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+  }
+  
   updateCart();
   loadCatalog();
   initScrollAnimations();
